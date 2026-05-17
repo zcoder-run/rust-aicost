@@ -1,7 +1,13 @@
 [package]
 name = "aicost"
 version = "0.1.0"
+description = "Compute LLM usage costs based on the genai::Usage type."
+license = "MIT OR Apache-2.0"
+keywords = ["genai", "openai", "anthropic", "gemini", "utility"]
 edition = "2024"
+rust-version = "1.95"
+homepage = "https://github.com/jeremychone/rust-aicost"
+repository = "https://github.com/jeremychone/rust-aicost"
 
 [lib]
 doctest = false
