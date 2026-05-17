@@ -47,45 +47,44 @@ pub fn compute(provider_type: &str, model_name: &str, usage: &Usage) -> Result<A
 	let price_completion_normal = model.output_normal;
 	let price_completion_reasoning = model.output_reasoning.unwrap_or(price_completion_normal);
 
-	// -- Compute individual cost components
+	// -- Compute individual cost components (raw)
 	let cost_prompt_normal = prompt_tokens_normal * price_prompt_normal / 1_000_000.0;
 	let cost_prompt_cached = prompt_cached_tokens * price_prompt_cached / 1_000_000.0;
 	let cost_prompt_cache_creation = prompt_cache_creation_tokens * price_prompt_cache_creation / 1_000_000.0;
 	let cost_completion_normal = completion_tokens_normal * price_completion_normal / 1_000_000.0;
 	let cost_completion_reasoning = completion_tokens_reasoning * price_completion_reasoning / 1_000_000.0;
 
-	// -- Compute total cost
-	let cost = cost_prompt_normal
-		+ cost_prompt_cached
-		+ cost_prompt_cache_creation
-		+ cost_completion_normal
-		+ cost_completion_reasoning;
-	let cost = (cost * 1_000_000.0).round() / 1_000_000.0;
+	// -- Compute total components (rounded)
+	let input_normal = (cost_prompt_normal * 1_000_000.0).round() / 1_000_000.0;
+	let input_cache_read = (cost_prompt_cached * 1_000_000.0).round() / 1_000_000.0;
+	let input_cache_write = (cost_prompt_cache_creation * 1_000_000.0).round() / 1_000_000.0;
+	let input_total = ((input_normal + input_cache_read + input_cache_write) * 1_000_000.0).round() / 1_000_000.0;
 
-	// -- Compute cache write cost (only if there was cache creation)
-	let cost_cache_write = if prompt_cache_creation_tokens > 0.0 {
-		Some((cost_prompt_cache_creation * 1_000_000.0).round() / 1_000_000.0)
-	} else {
-		None
-	};
+	let output_normal = (cost_completion_normal * 1_000_000.0).round() / 1_000_000.0;
+	let output_reasoning = (cost_completion_reasoning * 1_000_000.0).round() / 1_000_000.0;
+	let output_total = ((output_normal + output_reasoning) * 1_000_000.0).round() / 1_000_000.0;
 
-	// -- Compute cache saving (difference between what cached tokens would have cost at normal price vs cached price)
-	let cost_cache_saving = if prompt_cached_tokens > 0.0 {
+	let total = ((input_total + output_total) * 1_000_000.0).round() / 1_000_000.0;
+
+	// -- Compute cache saving
+	let input_cache_saving = if prompt_cached_tokens > 0.0 {
 		let would_have_cost = prompt_cached_tokens * price_prompt_normal / 1_000_000.0;
-		let saving = would_have_cost - cost_prompt_cached;
-		if saving > 0.0 {
-			Some((saving * 1_000_000.0).round() / 1_000_000.0)
-		} else {
-			None
-		}
+		let saving = (would_have_cost - cost_prompt_cached).max(0.0);
+		(saving * 1_000_000.0).round() / 1_000_000.0
 	} else {
-		None
+		0.0
 	};
 
 	Ok(AiCost {
-		cost,
-		cost_cache_write,
-		cost_cache_saving,
+		total,
+		input_total,
+		input_normal,
+		input_cache_read,
+		input_cache_write,
+		output_total,
+		output_normal,
+		output_reasoning,
+		input_cache_saving,
 	})
 }
 
@@ -166,13 +165,13 @@ mod tests {
 		let ai_cost = compute("openai", "gpt-4o", &usage)?;
 
 		// -- Check
-		let price = ai_cost.cost;
+		let price = ai_cost.total;
 		// gpt-4o pricing: input_normal: 2.5, output_normal: 10.0
 		// Expected: (1000 * 2.5 / 1_000_000) + (500 * 10.0 / 1_000_000) = 0.0025 + 0.005 = 0.0075
 		let expected = 0.0075;
 		assert!((price - expected).abs() < f64::EPSILON);
-		assert!(ai_cost.cost_cache_write.is_none());
-		assert!(ai_cost.cost_cache_saving.is_none());
+		assert!(ai_cost.input_cache_write == 0.0);
+		assert!(ai_cost.input_cache_saving == 0.0);
 
 		Ok(())
 	}
@@ -197,7 +196,7 @@ mod tests {
 		let ai_cost = compute("openai", "gpt-4o-mini", &usage)?;
 
 		// -- Check
-		let price = ai_cost.cost;
+		let price = ai_cost.total;
 		// gpt-4o-mini pricing: input_normal: 0.15, input_cached: 0.075, output_normal: 0.6
 		let cached = fx_cached_tokens as f64 * 0.075 / 1_000_000.0;
 		let prompt = fx_prompt_normal_tokens as f64 * 0.150 / 1_000_000.0;
@@ -205,8 +204,8 @@ mod tests {
 		let expected = cached + prompt + completion;
 		let expected = (expected * 1_000_000.0).round() / 1_000_000.0;
 		assert!((price - expected).abs() < f64::EPSILON);
-		assert!(ai_cost.cost_cache_saving.is_some());
-		assert!(ai_cost.cost_cache_write.is_none());
+		assert!(ai_cost.input_cache_saving > 0.0);
+		assert!(ai_cost.input_cache_write == 0.0);
 
 		Ok(())
 	}

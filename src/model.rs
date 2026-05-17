@@ -1,8 +1,17 @@
 #[derive(Debug, Clone, Copy)]
 pub struct AiCost {
-	pub cost: f64,
-	pub cost_cache_write: Option<f64>,
-	pub cost_cache_saving: Option<f64>,
+	pub total: f64,
+
+	pub input_total: f64,
+	pub input_normal: f64,
+	pub input_cache_read: f64,
+	pub input_cache_write: f64,
+
+	pub output_total: f64,
+	pub output_normal: f64,
+	pub output_reasoning: f64,
+
+	pub input_cache_saving: f64,
 }
 
 #[derive(Debug, Clone, Copy)]
