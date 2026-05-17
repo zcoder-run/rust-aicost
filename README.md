@@ -1,13 +1,15 @@
 # aicost
 
-A Rust library to compute LLM usage costs based on the [genai]([https](https://crates.io/crates/genai) crate types.
+A Rust library to compute LLM usage costs based on the [genai](https://crates.io/crates/genai) crate types.
+
+[doc-for-llm.md](docs/for-llm/doc-for-llm.md)
 
 ## Features
 
 - Supports multiple providers (OpenAI, Anthropic, Gemini, DeepSeek, Groq, xAI, Fireworks, Together, Zai).
 - Handles normal tokens, cached tokens (read/write), and reasoning tokens.
 - Provides granular cost breakdown via the `AiCost` struct.
-- Integrates with [genai]([https](https://crates.io/crates/genai) via `ModelIden` and `Usage`.
+- Integrates with [genai](https://crates.io/crates/genai) via `ModelIden` and `Usage`.
 
 ## Usage
 
@@ -57,3 +59,7 @@ pub struct AiCost {
     pub input_cache_saving: f64,
 }
 ```
+
+---
+
+_[This Repo](https://github.com/jeremychone/rust-aicost)_
