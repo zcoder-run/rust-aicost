@@ -8,6 +8,11 @@ _*
 !**/src/**/_*/
 !**/src/**/_*
 
+# -- pricer specifics
+pricer/data/pricing-all.json
+# in pricer/data
+*.html
+
 # -- AIPack
 # Ignore all .aipack files
 *.aipack
@@ -17,11 +22,6 @@ _*
 ## Optional: uncomment to allow the the .aipack/config.toml
 # !.aipack/
 # !.aipack/config.toml
-
-## Optional: uncomment to allow the .aipack/pack/custom/**
-# !.aipack/pack/
-# !.aipack/pack/custom/
-# !.aipack/pack/custom/**
 
 # -- Dev default
 tmp/

@@ -1,0 +1,154 @@
+{
+  "models": [
+    {
+      "name": "openai/gpt-oss-20b",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.1
+      },
+      "output": 0.5,
+      "recent": true
+    },
+    {
+      "name": "openai/gpt-oss-120b",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.15
+      },
+      "output": 0.75,
+      "recent": true
+    },
+    {
+      "name": "moonshotai/kimi-k2-instruct",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 1
+      },
+      "output": 3,
+      "recent": true
+    },
+    {
+      "name": "meta-llama/llama-4-scout-17b-16e-instruct",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.11
+      },
+      "output": 0.34,
+      "recent": true
+    },
+    {
+      "name": "meta-llama/llama-4-maverick-17b-128e-instruct",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.2
+      },
+      "output": 0.6,
+      "recent": true
+    },
+    {
+      "name": "meta-llama/llama-guard-4-12b",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.2
+      },
+      "output": 0.2,
+      "recent": true
+    },
+    {
+      "name": "deepseek-r1-distill-llama-70b",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.75
+      },
+      "output": 0.99,
+      "recent": true
+    },
+    {
+      "name": "qwen/qwen3-32b",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.29
+      },
+      "output": 0.59,
+      "recent": true
+    },
+    {
+      "name": "mistral-saba-24b-32k",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.79
+      },
+      "output": 0.79,
+      "recent": false
+    },
+    {
+      "name": "llama-3.3-70b-versatile",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.59
+      },
+      "output": 0.79,
+      "recent": true
+    },
+    {
+      "name": "llama-3.1-8b-instant",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.05
+      },
+      "output": 0.08,
+      "recent": true
+    },
+    {
+      "name": "llama3-70b-8k",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.59
+      },
+      "output": 0.79,
+      "recent": false
+    },
+    {
+      "name": "llama3-8b-8k",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.05
+      },
+      "output": 0.08,
+      "recent": false
+    },
+    {
+      "name": "gemma2-9b-it",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.2
+      },
+      "output": 0.2,
+      "recent": true
+    },
+    {
+      "name": "llama-guard-3-8b-8k",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.2
+      },
+      "output": 0.2,
+      "recent": false
+    }
+  ]
+}

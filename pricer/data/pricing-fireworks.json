@@ -1,0 +1,184 @@
+{
+  "models": [
+    {
+      "name": "deepseek-v4-pro",
+      "input": {
+        "cache_write": null,
+        "cached": 0.0145,
+        "normal": 1.74
+      },
+      "output": 3.48,
+      "recent": true
+    },
+    {
+      "name": "kimi-k2p6",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.95
+      },
+      "output": 4,
+      "recent": true
+    },
+    {
+      "name": "minimax-m2p7",
+      "input": {
+        "cache_write": null,
+        "cached": 0.06,
+        "normal": 0.3
+      },
+      "output": 1.2,
+      "recent": true
+    },
+    {
+      "name": "qwen3p6-plus",
+      "input": {
+        "cache_write": null,
+        "cached": 0.1,
+        "normal": 0.5
+      },
+      "output": 3,
+      "recent": true
+    },
+    {
+      "name": "glm-5p1",
+      "input": {
+        "cache_write": null,
+        "cached": 0.26,
+        "normal": 1.4
+      },
+      "output": 4.4,
+      "recent": true
+    },
+    {
+      "name": "kimi-k2p5",
+      "input": {
+        "cache_write": null,
+        "cached": 0.1,
+        "normal": 0.6
+      },
+      "output": 3,
+      "recent": false
+    },
+    {
+      "name": "deepseek-v3p2",
+      "input": {
+        "cache_write": null,
+        "cached": 0.28,
+        "normal": 0.56
+      },
+      "output": 1.68,
+      "recent": false
+    },
+    {
+      "name": "glm-5",
+      "input": {
+        "cache_write": null,
+        "cached": 0.2,
+        "normal": 1
+      },
+      "output": 3.2,
+      "recent": false
+    },
+    {
+      "name": "deepseek-v3p1",
+      "input": {
+        "cache_write": null,
+        "cached": 0.28,
+        "normal": 0.56
+      },
+      "output": 1.68,
+      "recent": false
+    },
+    {
+      "name": "gpt-oss-120b",
+      "input": {
+        "cache_write": null,
+        "cached": 0.01,
+        "normal": 0.15
+      },
+      "output": 0.6,
+      "recent": true
+    },
+    {
+      "name": "gpt-oss-20b",
+      "input": {
+        "cache_write": null,
+        "cached": 0.04,
+        "normal": 0.07
+      },
+      "output": 0.3,
+      "recent": true
+    },
+    {
+      "name": "llama-3p3-70b-instruct",
+      "input": {
+        "cache_write": null,
+        "cached": 0.45,
+        "normal": 0.9
+      },
+      "output": 0.9,
+      "recent": true
+    },
+    {
+      "name": "minimax-m2p5",
+      "input": {
+        "cache_write": null,
+        "cached": 0.03,
+        "normal": 0.3
+      },
+      "output": 1.2,
+      "recent": false
+    },
+    {
+      "name": "glm-4p7",
+      "input": {
+        "cache_write": null,
+        "cached": 0.3,
+        "normal": 0.6
+      },
+      "output": 2.2,
+      "recent": false
+    },
+    {
+      "name": "cogito-671b-v2p1",
+      "input": {
+        "cache_write": null,
+        "cached": 0.6,
+        "normal": 1.2
+      },
+      "output": 1.2,
+      "recent": true
+    },
+    {
+      "name": "qwen3-vl-30b-a3b-thinking",
+      "input": {
+        "cache_write": null,
+        "cached": 0.08,
+        "normal": 0.15
+      },
+      "output": 0.6,
+      "recent": true
+    },
+    {
+      "name": "qwen3-vl-30b-a3b-instruct",
+      "input": {
+        "cache_write": null,
+        "cached": 0.08,
+        "normal": 0.15
+      },
+      "output": 0.6,
+      "recent": true
+    },
+    {
+      "name": "qwen3-8b",
+      "input": {
+        "cache_write": null,
+        "cached": 0.1,
+        "normal": 0.2
+      },
+      "output": 0.2,
+      "recent": true
+    }
+  ]
+}
