@@ -7,6 +7,13 @@ pub const GEMINI: ProviderPricing = ProviderPricing {
 
 const GEMINI_MODELS: &[ModelPricing] = &[
 	ModelPricing {
+		name: "gemini-3.5-flash",
+		input_cached: Some(0.15),
+		input_normal: 1.5,
+		output_normal: 9.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
 		name: "gemini-3.1-pro",
 		input_cached: Some(0.2),
 		input_normal: 2.0,
@@ -123,6 +130,13 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 		input_cached: None,
 		input_normal: 0.15,
 		output_normal: 0.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "gemini-robotics-er-1.6",
+		input_cached: None,
+		input_normal: 1.0,
+		output_normal: 5.0,
 		output_reasoning: None,
 	},
 	ModelPricing {
