@@ -19,6 +19,6 @@ unsafe_code = "forbid"
 [dependencies]
 # -- AI
 # for now use the genai::Usage exclusively
-genai = { version = "=0.6.0-beta.20" }
+genai = { version = "=0.6.0-beta.21" }
 # -- Others
 derive_more = { version = "2", features = ["from", "display"] }
