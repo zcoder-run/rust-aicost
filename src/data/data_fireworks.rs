@@ -14,6 +14,13 @@ const FIREWORKS_MODELS: &[ModelPricing] = &[
 		output_reasoning: None,
 	},
 	ModelPricing {
+		name: "deepseek-v4-flash",
+		input_cached: Some(0.03),
+		input_normal: 0.14,
+		output_normal: 0.28,
+		output_reasoning: None,
+	},
+	ModelPricing {
 		name: "kimi-k2p6",
 		input_cached: None,
 		input_normal: 0.95,

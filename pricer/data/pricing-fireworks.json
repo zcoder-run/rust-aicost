@@ -11,6 +11,16 @@
       "recent": true
     },
     {
+      "name": "deepseek-v4-flash",
+      "input": {
+        "cache_write": null,
+        "cached": 0.03,
+        "normal": 0.14
+      },
+      "output": 0.28,
+      "recent": true
+    },
+    {
       "name": "kimi-k2p6",
       "input": {
         "cache_write": null,
@@ -178,7 +188,7 @@
         "normal": 0.2
       },
       "output": 0.2,
-      "recent": true
+      "recent": false
     }
   ]
 }
