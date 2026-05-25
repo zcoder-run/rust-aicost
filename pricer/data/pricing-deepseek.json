@@ -14,10 +14,10 @@
       "name": "deepseek-v4-pro",
       "input": {
         "cache_write": null,
-        "cached": 0.0145,
-        "normal": 1.74
+        "cached": 0.003625,
+        "normal": 0.435
       },
-      "output": 3.48,
+      "output": 0.87,
       "recent": true
     },
     {

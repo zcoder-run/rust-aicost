@@ -15,9 +15,9 @@ const DEEPSEEK_MODELS: &[ModelPricing] = &[
 	},
 	ModelPricing {
 		name: "deepseek-v4-pro",
-		input_cached: Some(0.0145),
-		input_normal: 1.74,
-		output_normal: 3.48,
+		input_cached: Some(0.003625),
+		input_normal: 0.435,
+		output_normal: 0.87,
 		output_reasoning: None,
 	},
 	ModelPricing {
