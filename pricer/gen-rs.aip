@@ -1,6 +1,6 @@
 # Options
 ```toml
-model = "flash"
+model = "flash3"
 ```
 
 # Before All
