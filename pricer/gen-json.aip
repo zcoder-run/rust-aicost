@@ -90,7 +90,13 @@ if not aip.path.exists(md_path) then
 end
 
 local file = aip.file.load(md_path)
-local sections = aip.file.load_md_sections(CTX.AGENT_FILE_DIR .. "/instructions.md", "# " .. provider_name)
+local instructions_path = CTX.AGENT_FILE_DIR .. "/instructions.md"
+local sections = aip.file.load_md_sections(instructions_path, "# " ..provider_name)
+
+if (not sections or #sections == 0) and provider_name ~= "default" then
+  sections = aip.file.load_md_sections(instructions_path, "# default")
+end
+
 local provider_instruction = nil
 
 if sections and #sections > 0 then

@@ -13,7 +13,7 @@ local inputs = p_utils.load_inputs()
 for _, input in ipairs(inputs) do
   input.rust_file_path = "src/data/data_" .. input.name .. ".rs"
   local provider_upper = string.upper(input.name:gsub("%W", "_"))
-  local rust_content = "use crate::run::pricing::{ModelPricing, ProviderPricing};\n\n"
+  local rust_content = "use crate::{ModelPricing, ProviderPricing};\n\n"
       .. "pub const " .. provider_upper .. ": ProviderPricing = ProviderPricing {\n"
       .. "\tname: \"" .. input.name .. "\",\n"
       .. "\tmodels: " .. provider_upper .. "_MODELS,\n"
