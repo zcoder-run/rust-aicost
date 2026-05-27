@@ -35,6 +35,10 @@ if not final_inputs or #final_inputs == 0 then
     final_inputs = p_utils.load_inputs()
 end
 
+for _, input in ipairs(final_inputs) do
+    aip.file.ensure_exists(input.json_path, "{\n  \"models\": []\n}\n", { content_when_empty = true })
+end
+
 return aip.flow.before_all_response({
     inputs     = final_inputs -- for now, inputs are the providers
 })
@@ -48,10 +52,13 @@ local json_path = input.json_path
 local html_path = input.html_path
 local provider_name = aip.text.trim(value_or(input.name, ""))
 
-if not input.do_json and aip.path.exists(input.json_path) then
-    return aip.flow.skip(input.name .. " marked as do_json = false and json exists, skipping")
+if not input.do_json then
+    return aip.flow.skip(input.name .. " marked as do_json = false, skipping")
 end
 
+if not aip.path.exists(json_path) then
+    aip.file.save(json_path, "{\n  \"models\": []\n}\n")
+end
 
 if input.url and input.url:find("%S") then
 	local res = aip.web.get(input.url)

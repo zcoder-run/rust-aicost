@@ -1,3 +1,7 @@
+# default
+
+Create/update the json version of this model name/pricing. 
+
 # openai
 
 - Make sure all models are all lowercase
