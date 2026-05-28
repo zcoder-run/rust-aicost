@@ -1,7 +1,7 @@
 {
   "models": [
     {
-      "name": "claude-opus-4-7",
+      "name": "claude-opus-4-8",
       "input": {
         "cache_write": 6.25,
         "cached": 0.5,
@@ -9,6 +9,16 @@
       },
       "output": 25,
       "recent": true
+    },
+    {
+      "name": "claude-opus-4-7",
+      "input": {
+        "cache_write": 6.25,
+        "cached": 0.5,
+        "normal": 5
+      },
+      "output": 25,
+      "recent": false
     },
     {
       "name": "claude-opus-4-6",
@@ -41,16 +51,6 @@
       "recent": false
     },
     {
-      "name": "claude-opus-4",
-      "input": {
-        "cache_write": 18.75,
-        "cached": 1.5,
-        "normal": 15
-      },
-      "output": 75,
-      "recent": false
-    },
-    {
       "name": "claude-sonnet-4-6",
       "input": {
         "cache_write": 3.75,
@@ -71,16 +71,6 @@
       "recent": false
     },
     {
-      "name": "claude-sonnet-4",
-      "input": {
-        "cache_write": 3.75,
-        "cached": 0.3,
-        "normal": 3
-      },
-      "output": 15,
-      "recent": false
-    },
-    {
       "name": "claude-haiku-4-5",
       "input": {
         "cache_write": 1.25,
@@ -89,26 +79,6 @@
       },
       "output": 5,
       "recent": true
-    },
-    {
-      "name": "claude-3-5-haiku",
-      "input": {
-        "cache_write": 1,
-        "cached": 0.08,
-        "normal": 0.8
-      },
-      "output": 4,
-      "recent": false
-    },
-    {
-      "name": "claude-haiku-3",
-      "input": {
-        "cache_write": 0.3,
-        "cached": 0.03,
-        "normal": 0.25
-      },
-      "output": 1.25,
-      "recent": false
     }
   ]
 }
