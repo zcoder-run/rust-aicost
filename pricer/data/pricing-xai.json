@@ -1,103 +1,24 @@
 {
   "models": [
     {
-      "name": "grok-4",
+      "name": "grok-4.3",
       "input": {
         "cache_write": null,
-        "cached": 0.75,
-        "normal": 3
+        "cached": 0.2,
+        "normal": 1.25
       },
-      "output": 15
-    },    
-    {
-      "name": "grok-3",
-      "input": {
-        "cache_write": null,
-        "cached": 0.75,
-        "normal": 3
-      },
-      "output": 15
+      "output": 2.5,
+      "recent": true
     },
     {
-      "name": "grok-3-mini",
+      "name": "grok-build-0.1",
       "input": {
         "cache_write": null,
-        "cached": 0.075,
-        "normal": 0.3
+        "cached": 0.2,
+        "normal": 1
       },
-      "output": 0.5
-    },
-    {
-      "name": "grok-3-fast",
-      "input": {
-        "cache_write": null,
-        "cached": 1.25,
-        "normal": 5
-      },
-      "output": 25
-    },
-    {
-      "name": "grok-3-mini-fast",
-      "input": {
-        "cache_write": null,
-        "cached": 0.15,
-        "normal": 0.6
-      },
-      "output": 4
-    },
-    {
-      "name": "grok-beta",
-      "input": {
-        "cache_write": null,
-        "cached": null,
-        "normal": 5
-      },
-      "output": 15
-    },
-    {
-      "name": "grok-2-image-gen",
-      "input": {
-        "cache_write": null,
-        "cached": null,
-        "normal": null
-      },
-      "output": null
-    },
-    {
-      "name": "grok-2-vision-1212",
-      "input": {
-        "cache_write": null,
-        "cached": null,
-        "normal": 2
-      },
-      "output": 10
-    },
-    {
-      "name": "grok-2-1212",
-      "input": {
-        "cache_write": null,
-        "cached": null,
-        "normal": 2
-      },
-      "output": 10
-    },
-    {
-      "name": "grok-vision-beta",
-      "input": {
-        "cache_write": null,
-        "cached": null,
-        "normal": 5
-      },
-      "output": 15
-    },
-    {
-      "name": "grok-2-image-1212",
-      "input": {
-        "cache_write": null,
-        "cached": null,
-        "normal": null
-      },
-      "output": 0.07
+      "output": 2,
+      "recent": true
     }
   ]
 }

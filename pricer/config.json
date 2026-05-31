@@ -22,12 +22,12 @@
     },
     {
       "name": "anthropic",
-      "do_json": true,
+      "do_json": false,
       "url": ""
     },
     {
       "name": "xai",
-      "do_json": false,
+      "do_json": true,
       "url": ""
     },
     {
