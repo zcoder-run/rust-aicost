@@ -27,12 +27,12 @@
     },
     {
       "name": "xai",
-      "do_json": true,
+      "do_json": false,
       "url": ""
     },
     {
       "name": "groq",
-      "do_json": false,
+      "do_json": true,
       "url": ""
     },
     {
