@@ -4,6 +4,7 @@ mod data_fireworks;
 mod data_gemini;
 mod data_groq;
 mod data_mimo;
+mod data_minimax;
 mod data_openai;
 mod data_together;
 mod data_xai;
@@ -22,4 +23,5 @@ pub const PROVIDERS: &[ProviderPricing] = &[
 	data_together::TOGETHER,
 	data_zai::ZAI,
 	data_mimo::MIMO,
+	data_minimax::MINIMAX,
 ];

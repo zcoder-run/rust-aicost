@@ -21,6 +21,11 @@
       "url": ""
     },
     {
+      "name": "minimax",
+      "do_json": true,
+      "url": ""
+    },
+    {
       "name": "anthropic",
       "do_json": false,
       "url": ""
@@ -32,7 +37,7 @@
     },
     {
       "name": "groq",
-      "do_json": true,
+      "do_json": false,
       "url": ""
     },
     {
