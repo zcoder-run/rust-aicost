@@ -1,6 +1,16 @@
 {
   "models": [
     {
+      "name": "claude-fable-5",
+      "input": {
+        "cache_write": 12.5,
+        "cached": 1,
+        "normal": 10
+      },
+      "output": 50,
+      "recent": true
+    },
+    {
       "name": "claude-opus-4-8",
       "input": {
         "cache_write": 6.25,
