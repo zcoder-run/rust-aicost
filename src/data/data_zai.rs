@@ -7,6 +7,13 @@ pub const ZAI: ProviderPricing = ProviderPricing {
 
 const ZAI_MODELS: &[ModelPricing] = &[
 	ModelPricing {
+		name: "glm-5.1",
+		input_cached: Some(0.26),
+		input_normal: 1.4,
+		output_normal: 4.4,
+		output_reasoning: None,
+	},
+	ModelPricing {
 		name: "glm-5",
 		input_cached: Some(0.2),
 		input_normal: 1.0,
@@ -18,6 +25,13 @@ const ZAI_MODELS: &[ModelPricing] = &[
 		input_cached: Some(0.3),
 		input_normal: 1.2,
 		output_normal: 5.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "glm-5-turbo",
+		input_cached: Some(0.24),
+		input_normal: 1.2,
+		output_normal: 4.0,
 		output_reasoning: None,
 	},
 	ModelPricing {
@@ -91,6 +105,13 @@ const ZAI_MODELS: &[ModelPricing] = &[
 		output_reasoning: None,
 	},
 	ModelPricing {
+		name: "glm-5v-turbo",
+		input_cached: Some(0.24),
+		input_normal: 1.2,
+		output_normal: 4.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
 		name: "glm-4.6v",
 		input_cached: Some(0.05),
 		input_normal: 0.3,
@@ -129,21 +150,21 @@ const ZAI_MODELS: &[ModelPricing] = &[
 		name: "glm-asr-2512",
 		input_cached: None,
 		input_normal: 0.03,
-		output_normal: 0.03,
+		output_normal: 0.0,
 		output_reasoning: None,
 	},
 	ModelPricing {
 		name: "glm slide/poster agent(beta)",
 		input_cached: None,
 		input_normal: 0.7,
-		output_normal: 0.7,
+		output_normal: 0.0,
 		output_reasoning: None,
 	},
 	ModelPricing {
 		name: "general-purpose translation",
 		input_cached: None,
 		input_normal: 3.0,
-		output_normal: 3.0,
+		output_normal: 0.0,
 		output_reasoning: None,
 	},
 ];

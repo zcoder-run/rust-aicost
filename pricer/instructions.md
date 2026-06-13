@@ -85,6 +85,7 @@ Create/update the json version of this model name/pricing.
 # zai
 
 - Make sure all models are all lowercase
-- For ZAI models
-  - only `glm-5..` are `recent: true` everything else is false.
+- only take the Text Models (ignore the other models)
+- when cache storage/write is `Cached Input Storage` then, keep it "null" in the json
+- Make sure only the lastest glm is marked `recent: true`
 

@@ -14,8 +14,9 @@ Prices per 1M tokens.
 
 | Model               | Input  | Cached Input | Cached Input Storage | Output |
 | :------------------ | :----- | :----------- | :------------------- | :----- |
+| GLM-5.1             | \$1.4  | \$0.26       | Limited-time Free    | \$4.4  |
 | GLM-5               | \$1    | \$0.2        | Limited-time Free    | \$3.2  |
-| GLM-5-Code          | \$1.2  | \$0.3        | Limited-time Free    | \$5    |
+| GLM-5-Turbo         | \$1.2  | \$0.24       | Limited-time Free    | \$4.0  |
 | GLM-4.7             | \$0.6  | \$0.11       | Limited-time Free    | \$2.2  |
 | GLM-4.7-FlashX      | \$0.07 | \$0.01       | Limited-time Free    | \$0.4  |
 | GLM-4.6             | \$0.6  | \$0.11       | Limited-time Free    | \$2.2  |
@@ -33,6 +34,7 @@ Prices per 1M tokens.
 
 | Model           | Input  | Cached Input | Cached Input Storage | Output |
 | :-------------- | :----- | :----------- | :------------------- | :----- |
+| GLM-5V-Turbo    | \$1.2  | \$0.24       | Limited-time Free    | \$4    |
 | GLM-4.6V        | \$0.3  | \$0.05       | Limited-time Free    | \$0.9  |
 | GLM-OCR         | \$0.03 | \\           | \\                   | \$0.03 |
 | GLM-4.6V-FlashX | \$0.04 | \$0.004      | Limited-time Free    | \$0.4  |
