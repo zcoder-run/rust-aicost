@@ -82,6 +82,10 @@ Create/update the json version of this model name/pricing.
   - For Groq models there are two sections in the markdown, the pricing and the name. Make sure to take the name from the name section, and infer the "display name" to get the pricing.
   - For Groq models, the models that are both section name and price, mark them as `recent: true`, if they are not in the model names, then `recent: false`
 
+# minimax
+
+- Make sure only the lastest M.. is marked `recent: true`
+
 # zai
 
 - Make sure all models are all lowercase
