@@ -1,6 +1,36 @@
 {
   "models": [
     {
+      "name": "minimax-m3",
+      "input": {
+        "cache_write": null,
+        "cached": 0.06,
+        "normal": 0.3
+      },
+      "output": 1.2,
+      "recent": true
+    },
+    {
+      "name": "qwen3p7-plus",
+      "input": {
+        "cache_write": null,
+        "cached": 0.08,
+        "normal": 0.4
+      },
+      "output": 1.6,
+      "recent": true
+    },
+    {
+      "name": "kimi-k2p7-code",
+      "input": {
+        "cache_write": null,
+        "cached": 0.19,
+        "normal": 0.95
+      },
+      "output": 4,
+      "recent": true
+    },
+    {
       "name": "deepseek-v4-pro",
       "input": {
         "cache_write": null,
@@ -28,7 +58,7 @@
         "normal": 0.95
       },
       "output": 4,
-      "recent": true
+      "recent": false
     },
     {
       "name": "minimax-m2p7",
@@ -38,7 +68,7 @@
         "normal": 0.3
       },
       "output": 1.2,
-      "recent": true
+      "recent": false
     },
     {
       "name": "qwen3p6-plus",
@@ -48,7 +78,7 @@
         "normal": 0.5
       },
       "output": 3,
-      "recent": true
+      "recent": false
     },
     {
       "name": "glm-5p1",
@@ -188,7 +218,7 @@
         "normal": 0.2
       },
       "output": 0.2,
-      "recent": false
+      "recent": true
     }
   ]
 }

@@ -7,6 +7,27 @@ pub const FIREWORKS: ProviderPricing = ProviderPricing {
 
 const FIREWORKS_MODELS: &[ModelPricing] = &[
 	ModelPricing {
+		name: "minimax-m3",
+		input_cached: Some(0.06),
+		input_normal: 0.3,
+		output_normal: 1.2,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "qwen3p7-plus",
+		input_cached: Some(0.08),
+		input_normal: 0.4,
+		output_normal: 1.6,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "kimi-k2p7-code",
+		input_cached: Some(0.19),
+		input_normal: 0.95,
+		output_normal: 4.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
 		name: "deepseek-v4-pro",
 		input_cached: Some(0.0145),
 		input_normal: 1.74,
