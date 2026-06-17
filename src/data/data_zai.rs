@@ -7,6 +7,13 @@ pub const ZAI: ProviderPricing = ProviderPricing {
 
 const ZAI_MODELS: &[ModelPricing] = &[
 	ModelPricing {
+		name: "glm-5.2",
+		input_cached: Some(0.26),
+		input_normal: 1.4,
+		output_normal: 4.4,
+		output_reasoning: None,
+	},
+	ModelPricing {
 		name: "glm-5.1",
 		input_cached: Some(0.26),
 		input_normal: 1.4,

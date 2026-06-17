@@ -1,7 +1,7 @@
 {
   "models": [
     {
-      "name": "glm-5.1",
+      "name": "glm-5.2",
       "input": {
         "cache_write": null,
         "cached": 0.26,
@@ -9,6 +9,16 @@
       },
       "output": 4.4,
       "recent": true
+    },
+    {
+      "name": "glm-5.1",
+      "input": {
+        "cache_write": null,
+        "cached": 0.26,
+        "normal": 1.4
+      },
+      "output": 4.4,
+      "recent": false
     },
     {
       "name": "glm-5",

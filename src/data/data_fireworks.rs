@@ -7,6 +7,13 @@ pub const FIREWORKS: ProviderPricing = ProviderPricing {
 
 const FIREWORKS_MODELS: &[ModelPricing] = &[
 	ModelPricing {
+		name: "glm-5p2",
+		input_cached: Some(0.26),
+		input_normal: 1.4,
+		output_normal: 4.4,
+		output_reasoning: None,
+	},
+	ModelPricing {
 		name: "minimax-m3",
 		input_cached: Some(0.06),
 		input_normal: 0.3,

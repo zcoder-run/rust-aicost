@@ -1,6 +1,16 @@
 {
   "models": [
     {
+      "name": "glm-5p2",
+      "input": {
+        "cache_write": null,
+        "cached": 0.26,
+        "normal": 1.4
+      },
+      "output": 4.4,
+      "recent": true
+    },
+    {
       "name": "minimax-m3",
       "input": {
         "cache_write": null,
@@ -88,7 +98,7 @@
         "normal": 1.4
       },
       "output": 4.4,
-      "recent": true
+      "recent": false
     },
     {
       "name": "kimi-k2p5",
@@ -148,7 +158,7 @@
         "normal": 0.07
       },
       "output": 0.3,
-      "recent": true
+      "recent": false
     },
     {
       "name": "llama-3p3-70b-instruct",
@@ -198,7 +208,7 @@
         "normal": 0.15
       },
       "output": 0.6,
-      "recent": true
+      "recent": false
     },
     {
       "name": "qwen3-vl-30b-a3b-instruct",
@@ -208,7 +218,7 @@
         "normal": 0.15
       },
       "output": 0.6,
-      "recent": true
+      "recent": false
     },
     {
       "name": "qwen3-8b",
@@ -218,7 +228,7 @@
         "normal": 0.2
       },
       "output": 0.2,
-      "recent": true
+      "recent": false
     }
   ]
 }

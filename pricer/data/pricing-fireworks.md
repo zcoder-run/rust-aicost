@@ -1,6 +1,7 @@
 | **Model identifier**                  | **Input** | **Cached Input** | **Output** |
 | ------------------------------------- | --------- | ---------------- | ---------- |
-| `fireworks//minimax-m3`               | $0.30     | $0.06            | $1.20      |
+| `fireworks/glm-5p2`                   | $1.40     | $0.26            | $4.40      |
+| `fireworks/minimax-m3`                | $0.30     | $0.06            | $1.20      |
 | `fireworks/qwen3p7-plus`              | $0.40     | $0.08            | $1.60      |
 | `fireworks/kimi-k2p7-code`            | $0.95     | $0.19            | $4.00      |
 | `fireworks/deepseek-v4-pro`           | $1.74     | $0.0145          | $3.48      |

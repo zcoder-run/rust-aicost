@@ -14,6 +14,7 @@ Prices per 1M tokens.
 
 | Model               | Input  | Cached Input | Cached Input Storage | Output |
 | :------------------ | :----- | :----------- | :------------------- | :----- |
+| GLM-5.2             | \$1.4  | \$0.26       | Limited-time Free    | \$4.4  |
 | GLM-5.1             | \$1.4  | \$0.26       | Limited-time Free    | \$4.4  |
 | GLM-5               | \$1    | \$0.2        | Limited-time Free    | \$3.2  |
 | GLM-5-Turbo         | \$1.2  | \$0.24       | Limited-time Free    | \$4.0  |
