@@ -1,0 +1,24 @@
+{
+  "models": [
+    {
+      "name": "kimi-k2.7-code",
+      "input": {
+        "cache_write": null,
+        "cached": 0.19,
+        "normal": 0.95
+      },
+      "output": 4,
+      "recent": true
+    },
+    {
+      "name": "kimi-k2.7-code-highspeed",
+      "input": {
+        "cache_write": null,
+        "cached": 0.38,
+        "normal": 1.9
+      },
+      "output": 8,
+      "recent": true
+    }
+  ]
+}

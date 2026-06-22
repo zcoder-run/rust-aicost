@@ -3,6 +3,7 @@ mod data_deepseek;
 mod data_fireworks;
 mod data_gemini;
 mod data_groq;
+mod data_kimi;
 mod data_mimo;
 mod data_minimax;
 mod data_openai;
@@ -24,4 +25,5 @@ pub const PROVIDERS: &[ProviderPricing] = &[
 	data_zai::ZAI,
 	data_mimo::MIMO,
 	data_minimax::MINIMAX,
+	data_kimi::KIMI,
 ];

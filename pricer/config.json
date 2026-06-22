@@ -16,6 +16,16 @@
       "url": ""
     },
     {
+      "name": "zai",
+      "do_json": false,
+      "url": ""
+    },
+    {
+      "name": "kimi",
+      "do_json": false,
+      "url": ""
+    },
+    {
       "name": "mimo",
       "do_json": false,
       "url": ""
@@ -42,17 +52,12 @@
     },
     {
       "name": "fireworks",
-      "do_json": true,
+      "do_json": false,
       "url": ""
     },
     {
       "name": "together",
       "do_json": false,
-      "url": ""
-    },
-    {
-      "name": "zai",
-      "do_json": true,
       "url": ""
     }
   ]
