@@ -1,6 +1,6 @@
 [package]
 name = "aicost"
-version = "0.1.13-WIP"
+version = "0.1.13"
 description = "Compute LLM usage costs based on the genai::Usage type."
 license = "MIT OR Apache-2.0"
 keywords = ["genai", "openai", "anthropic", "gemini", "utility"]
