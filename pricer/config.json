@@ -22,7 +22,7 @@
     },
     {
       "name": "kimi",
-      "do_json": false,
+      "do_json": true,
       "url": ""
     },
     {

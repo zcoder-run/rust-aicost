@@ -19,6 +19,26 @@
       },
       "output": 8,
       "recent": true
+    },
+    {
+      "name": "kimi-k2.6",
+      "input": {
+        "cache_write": null,
+        "cached": 0.16,
+        "normal": 0.95
+      },
+      "output": 4,
+      "recent": false
+    },
+    {
+      "name": "kimi-k2.5",
+      "input": {
+        "cache_write": null,
+        "cached": 0.1,
+        "normal": 0.6
+      },
+      "output": 3,
+      "recent": false
     }
   ]
 }

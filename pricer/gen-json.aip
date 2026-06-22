@@ -1,7 +1,7 @@
 # Options
 
 ```toml
-model = "flash3"
+model = "dflash"
 input_concurrency = 6
 ```
 

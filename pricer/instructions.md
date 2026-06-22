@@ -93,3 +93,8 @@ Create/update the json version of this model name/pricing.
 - when cache storage/write is `Cached Input Storage` then, keep it "null" in the json
 - Make sure only the lastest glm is marked `recent: true`
 
+# kimi
+
+- Cache Hit means when the input is cache (NOT the cache price)
+- Make sure only the last model version is marked `recent: true`
+
