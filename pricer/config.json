@@ -1,6 +1,11 @@
 {
   "providers": [
     {
+      "name": "anthropic",
+      "do_json": true,
+      "url": ""
+    },
+    {
       "name": "openai",
       "do_json": false,
       "url": ""
@@ -22,7 +27,7 @@
     },
     {
       "name": "kimi",
-      "do_json": true,
+      "do_json": false,
       "url": ""
     },
     {
@@ -32,11 +37,6 @@
     },
     {
       "name": "minimax",
-      "do_json": false,
-      "url": ""
-    },
-    {
-      "name": "anthropic",
       "do_json": false,
       "url": ""
     },
