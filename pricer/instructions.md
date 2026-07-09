@@ -6,14 +6,11 @@ Create/update the json version of this model name/pricing.
 
 - Make sure all models are all lowercase
 - for OpenAI models
+  - Now, only the 5.6 is recent true, other are recent false. 
   - Only take the "standards" pricing,
   - set `cache_write: null` when not defined.
   - ignore the legacy models
   - Do not add the gpt-image-1 or audio models
-  - for the `recent`
-    - Only the `gpt-5...` can have recent true, and also take the high version of each variant for `recent: true` (the rest are false)
-      - So, only 1 true, for base `gpt-...` one for `gpt-...-mini` and so on. 
-    - All others, `recent: false` (codex-mini-latest is alwys `recent: false`)
   - ignore the lines have have dates like text, like `2024-05-13`
   - only take the Text tokens section, ignore the other sections.
   - there are not cash write, so, only input and cached when present, and then the output.
