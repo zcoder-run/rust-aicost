@@ -20,4 +20,11 @@ const XAI_MODELS: &[ModelPricing] = &[
 		output_normal: 2.0,
 		output_reasoning: None,
 	},
+	ModelPricing {
+		name: "grok-4.5",
+		input_cached: Some(0.5),
+		input_normal: 2.0,
+		output_normal: 6.0,
+		output_reasoning: None,
+	},
 ];

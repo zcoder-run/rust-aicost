@@ -2,6 +2,10 @@
 
 Create/update the json version of this model name/pricing. 
 
+# xai
+
+- Make sure only the latest models version have the `recent: true` others should be `recent: false` (per model name)
+
 # openai
 
 - Make sure all models are all lowercase
