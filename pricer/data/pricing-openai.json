@@ -3,7 +3,7 @@
     {
       "name": "gpt-5.6-sol",
       "input": {
-        "cache_write": null,
+        "cache_write": 6.25,
         "cached": 0.5,
         "normal": 5
       },
@@ -13,7 +13,7 @@
     {
       "name": "gpt-5.6-terra",
       "input": {
-        "cache_write": null,
+        "cache_write": 3.125,
         "cached": 0.25,
         "normal": 2.5
       },
@@ -23,7 +23,7 @@
     {
       "name": "gpt-5.6-luna",
       "input": {
-        "cache_write": null,
+        "cache_write": 1.25,
         "cached": 0.1,
         "normal": 1
       },
