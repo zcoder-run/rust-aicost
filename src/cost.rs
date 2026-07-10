@@ -77,14 +77,18 @@ pub fn compute(provider_type: &str, model_name: &str, usage: &Usage) -> Result<A
 
 	Ok(AiCost {
 		total,
+
+		// -- input
 		input_total,
 		input_normal,
 		input_cache_read,
 		input_cache_write,
+		input_cache_saving,
+
+		// -- output
 		output_total,
 		output_normal,
 		output_reasoning,
-		input_cache_saving,
 	})
 }
 
