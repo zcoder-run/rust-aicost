@@ -468,4 +468,11 @@ const FIREWORKS_MODELS: &[ModelPricing] = &[
 		output_normal: 3.2,
 		output_reasoning: None,
 	},
+	ModelPricing {
+		name: "kimi-k3",
+		input_cached: Some(0.3),
+		input_normal: 3.0,
+		output_normal: 15.0,
+		output_reasoning: None,
+	},
 ];

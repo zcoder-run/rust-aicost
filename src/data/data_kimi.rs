@@ -6,6 +6,13 @@ pub const KIMI: ProviderPricing = ProviderPricing {
 };
 
 const KIMI_MODELS: &[ModelPricing] = &[
+    ModelPricing {
+        name: "kimi-k3",
+        input_cached: Some(0.3),
+        input_normal: 3.0,
+        output_normal: 15.0,
+        output_reasoning: None,
+    },
 	ModelPricing {
 		name: "kimi-k2.7-code",
 		input_cached: Some(0.19),

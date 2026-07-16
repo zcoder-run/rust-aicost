@@ -2,6 +2,10 @@
 
 Create/update the json version of this model name/pricing. 
 
+# kimi
+
+- Make k3 and k2.7 `recent: true` the rest `recent: false`
+- 
 # xai
 
 - Make sure only the latest models version have the `recent: true` others should be `recent: false` (per model name)

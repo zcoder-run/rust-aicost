@@ -1,5 +1,6 @@
 | **Model identifier**                  | **Input** | **Cached Input** | **Output** |
 | ------------------------------------- | --------- | ---------------- | ---------- |
+| `fireworks/kimi-k3`                   | $3.00     |   $0.30          | $15.00     |
 | `fireworks/glm-5p2`                   | $1.40     | $0.26            | $4.40      |
 | `fireworks/minimax-m3`                | $0.30     | $0.06            | $1.20      |
 | `fireworks/qwen3p7-plus`              | $0.40     | $0.08            | $1.60      |
