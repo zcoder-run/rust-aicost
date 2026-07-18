@@ -62,4 +62,4 @@ pub struct AiCost {
 
 ---
 
-_[This Repo](https://github.com/jeremychone/rust-aicost)_
+_[This Repo](https://github.com/zcoder-run/rust-aicost)_

@@ -6,8 +6,8 @@ license = "MIT OR Apache-2.0"
 keywords = ["genai", "openai", "anthropic", "gemini", "utility"]
 edition = "2024"
 rust-version = "1.95"
-homepage = "https://github.com/jeremychone/rust-aicost"
-repository = "https://github.com/jeremychone/rust-aicost"
+homepage = "https://github.com/zcoder-run/rust-aicost"
+repository = "https://github.com/zcoder-run/rust-aicost"
 
 [lib]
 doctest = false
