@@ -12,7 +12,7 @@
     },
     {
       "name": "gemini",
-      "do_json": false,
+      "do_json": true,
       "url": ""
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "name": "kimi",
-      "do_json": true,
+      "do_json": false,
       "url": ""
     },
     {
