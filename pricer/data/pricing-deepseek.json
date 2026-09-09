@@ -1,6 +1,16 @@
 {
   "models": [
     {
+      "name": "deepseek-v4.1-flash",
+      "input": {
+        "cache_write": null,
+        "cached": 0.003,
+        "normal": 0.15
+      },
+      "output": 0.6,
+      "recent": true
+    },
+    {
       "name": "deepseek-v4-flash",
       "input": {
         "cache_write": null,
@@ -8,7 +18,7 @@
         "normal": 0.22
       },
       "output": 0.66,
-      "recent": true
+      "recent": false
     },
     {
       "name": "deepseek-v4-pro",

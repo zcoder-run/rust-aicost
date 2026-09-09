@@ -46,7 +46,8 @@ Create/update the json version of this model name/pricing.
 
 # deepseek
 
-- Only the `-v4` model are `recent: true`
+- Take the latest of each the `-v4` model are `recent: true`
+- Models that are below v4, only `recent:false`
 
 # anthropic
 
