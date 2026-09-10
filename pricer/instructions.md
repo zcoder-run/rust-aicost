@@ -46,8 +46,8 @@ Create/update the json version of this model name/pricing.
 
 # deepseek
 
-- Take the latest of each the `-v4` model are `recent: true`
-- Models that are below v4, only `recent:false`
+- For now, only the `deepseek-flash` is `recent: true`
+- The other models are legacy
 
 # anthropic
 

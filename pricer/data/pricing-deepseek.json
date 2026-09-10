@@ -1,7 +1,7 @@
 {
   "models": [
     {
-      "name": "deepseek-v4.1-flash",
+      "name": "deepseek-flash",
       "input": {
         "cache_write": null,
         "cached": 0.003,
@@ -28,7 +28,7 @@
         "normal": 0.66
       },
       "output": 1.98,
-      "recent": true
+      "recent": false
     },
     {
       "name": "deepseek-chat",
