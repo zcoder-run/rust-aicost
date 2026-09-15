@@ -7,6 +7,41 @@ pub const FIREWORKS: ProviderPricing = ProviderPricing {
 
 const FIREWORKS_MODELS: &[ModelPricing] = &[
 	ModelPricing {
+		name: "deepseek-v4p1-flash",
+		input_cached: Some(0.007),
+		input_normal: 0.22,
+		output_normal: 0.66,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "glm-5p3-flash",
+		input_cached: Some(0.03),
+		input_normal: 0.15,
+		output_normal: 0.5,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "glm-5p3",
+		input_cached: Some(0.26),
+		input_normal: 1.4,
+		output_normal: 4.4,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "qwen3p8-max",
+		input_cached: Some(0.25),
+		input_normal: 2.0,
+		output_normal: 6.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "deepseek-v4-flash-0731",
+		input_cached: Some(0.007),
+		input_normal: 0.22,
+		output_normal: 0.66,
+		output_reasoning: None,
+	},
+	ModelPricing {
 		name: "qwen3p8-2p4t-a95b",
 		input_cached: Some(0.25),
 		input_normal: 2.0,

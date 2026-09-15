@@ -1,7 +1,37 @@
 {
   "models": [
     {
-      "name": "qwen3p8-2p4t-a95b",
+      "name": "deepseek-v4p1-flash",
+      "input": {
+        "cache_write": null,
+        "cached": 0.007,
+        "normal": 0.22
+      },
+      "output": 0.66,
+      "recent": true
+    },
+    {
+      "name": "glm-5p3-flash",
+      "input": {
+        "cache_write": null,
+        "cached": 0.03,
+        "normal": 0.15
+      },
+      "output": 0.5,
+      "recent": true
+    },
+    {
+      "name": "glm-5p3",
+      "input": {
+        "cache_write": null,
+        "cached": 0.26,
+        "normal": 1.4
+      },
+      "output": 4.4,
+      "recent": true
+    },
+    {
+      "name": "qwen3p8-max",
       "input": {
         "cache_write": null,
         "cached": 0.25,
@@ -21,26 +51,6 @@
       "recent": true
     },
     {
-      "name": "deepseek-v4-pro",
-      "input": {
-        "cache_write": null,
-        "cached": 0.044,
-        "normal": 1.32
-      },
-      "output": 3.96,
-      "recent": true
-    },
-    {
-      "name": "deepseek-v4-flash",
-      "input": {
-        "cache_write": null,
-        "cached": 0.014,
-        "normal": 0.44
-      },
-      "output": 1.32,
-      "recent": true
-    },
-    {
       "name": "kimi-k3",
       "input": {
         "cache_write": null,
@@ -51,6 +61,46 @@
       "recent": true
     },
     {
+      "name": "qwen3p8-2p4t-a95b",
+      "input": {
+        "cache_write": null,
+        "cached": 0.25,
+        "normal": 2
+      },
+      "output": 6,
+      "recent": true
+    },
+    {
+      "name": "deepseek-v4-flash-0731",
+      "input": {
+        "cache_write": null,
+        "cached": 0.007,
+        "normal": 0.22
+      },
+      "output": 0.66,
+      "recent": false
+    },
+    {
+      "name": "deepseek-v4-pro",
+      "input": {
+        "cache_write": null,
+        "cached": 0.044,
+        "normal": 1.32
+      },
+      "output": 3.96,
+      "recent": false
+    },
+    {
+      "name": "deepseek-v4-flash",
+      "input": {
+        "cache_write": null,
+        "cached": 0.014,
+        "normal": 0.44
+      },
+      "output": 1.32,
+      "recent": false
+    },
+    {
       "name": "glm-5p2",
       "input": {
         "cache_write": null,
@@ -58,7 +108,7 @@
         "normal": 1.4
       },
       "output": 4.4,
-      "recent": true
+      "recent": false
     },
     {
       "name": "minimax-m3",
@@ -87,7 +137,7 @@
         "cached": 0.19,
         "normal": 0.95
       },
-      "output": 4,
+      "output": 4
       "recent": false
     },
     {
@@ -148,7 +198,7 @@
         "normal": 0.56
       },
       "output": 1.68,
-      "recent": true
+      "recent": false
     },
     {
       "name": "glm-5",
@@ -238,7 +288,7 @@
         "normal": 0.15
       },
       "output": 0.6,
-      "recent": true
+      "recent": false
     },
     {
       "name": "qwen3-vl-30b-a3b-instruct",
@@ -248,7 +298,7 @@
         "normal": 0.15
       },
       "output": 0.6,
-      "recent": true
+      "recent": false
     },
     {
       "name": "qwen3-8b",
@@ -258,7 +308,7 @@
         "normal": 0.2
       },
       "output": 0.2,
-      "recent": true
+      "recent": false
     }
   ]
 }

@@ -31,7 +31,8 @@ Create/update the json version of this model name/pricing.
   - For the Fireworks models, the model name is after the `/models/fireworks/`. So, `/models/fireworks/qwen3-coder-480b-a35b-instruct` the model name will be `qwen3-coder-480b-a35b-instruct`
   - For the Fireworks models, when only one price, it means same price for input and output.
   - For the fireworks models, Look at the version number for each model type, and make the one with the highest number `recent: true` (if only version for that model type, then, `recent: true`) otherwise, false. 
-  - make sure only the latest verison of qwen, deepseek-..flash, deepseek-...pro, kimi, ... are marked recent: true, all the other should be recent: false. 
+  - make sure only the latest verison of qwen, glm, ...
+  - For deepseek model, only the deepseek-v4p1-flash is the `recent: true` others deepsaek are `recent: false`
 
 # together
 
