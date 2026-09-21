@@ -1,4 +1,9 @@
 
+grok-4.7
+  - input: $2.00 / 1M tokens
+  - input cache: $0.50 / 1M tokens
+  - output: $6.00 / 1M tokens
+
 grok-4.6
   - input: $2.00 / 1M tokens
   - input cache: $0.50 / 1M tokens
