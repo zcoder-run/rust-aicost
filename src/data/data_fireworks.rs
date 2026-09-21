@@ -8,9 +8,9 @@ pub const FIREWORKS: ProviderPricing = ProviderPricing {
 const FIREWORKS_MODELS: &[ModelPricing] = &[
 	ModelPricing {
 		name: "deepseek-v4p1-flash",
-		input_cached: Some(0.007),
-		input_normal: 0.22,
-		output_normal: 0.66,
+		input_cached: Some(0.006),
+		input_normal: 0.3,
+		output_normal: 1.2,
 		output_reasoning: None,
 	},
 	ModelPricing {
