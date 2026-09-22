@@ -4,7 +4,17 @@
       "name": "claude-fable-5-1",
       "input": {
         "cache_write": 12.5,
-        "cached": 1,
+        "cached": 0.25,
+        "normal": 10
+      },
+      "output": 50,
+      "recent": true
+    },
+    {
+      "name": "claude-mythos-5-1",
+      "input": {
+        "cache_write": 12.5,
+        "cached": 0.25,
         "normal": 10
       },
       "output": 50,
@@ -28,6 +38,16 @@
         "normal": 10
       },
       "output": 50,
+      "recent": false
+    },
+    {
+      "name": "claude-opus-5-5",
+      "input": {
+        "cache_write": 5,
+        "cached": 0.2,
+        "normal": 4
+      },
+      "output": 20,
       "recent": true
     },
     {
@@ -38,7 +58,7 @@
         "normal": 5
       },
       "output": 25,
-      "recent": true
+      "recent": false
     },
     {
       "name": "claude-opus-4-8",
