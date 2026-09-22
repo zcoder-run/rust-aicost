@@ -14,7 +14,7 @@ Create/update the json version of this model name/pricing.
 
 - Make sure all models are all lowercase
 - for OpenAI models
-  - Now, only the 5.6 is recent true and gpt-6 as well. others are false
+  - Now, only 6 or above are marked recent, only the last of each type. Others are false. 
   - Only take the "standards" pricing,
   - set `cache_write: null` when not defined.
   - ignore the legacy models

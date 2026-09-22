@@ -11,6 +11,26 @@
       "recent": true
     },
     {
+      "name": "gpt-6-sol",
+      "input": {
+        "cache_write": 2.5,
+        "cached": 0.2,
+        "normal": 2
+      },
+      "output": 10,
+      "recent": true
+    },
+    {
+      "name": "gpt-6-luna",
+      "input": {
+        "cache_write": 0.125,
+        "cached": 0.01,
+        "normal": 0.1
+      },
+      "output": 0.5,
+      "recent": true
+    },
+    {
       "name": "gpt-5.6-sol",
       "input": {
         "cache_write": 5,
@@ -18,7 +38,7 @@
         "normal": 4
       },
       "output": 20,
-      "recent": true
+      "recent": false
     },
     {
       "name": "gpt-5.6-terra",
@@ -28,7 +48,7 @@
         "normal": 2
       },
       "output": 12,
-      "recent": true
+      "recent": false
     },
     {
       "name": "gpt-5.6-luna",
@@ -38,7 +58,7 @@
         "normal": 0.2
       },
       "output": 1.2,
-      "recent": true
+      "recent": false
     },
     {
       "name": "gpt-5.5",

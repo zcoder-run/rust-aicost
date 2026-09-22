@@ -14,6 +14,20 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 		output_reasoning: None,
 	},
 	ModelPricing {
+		name: "gpt-6-sol",
+		input_cached: Some(0.2),
+		input_normal: 2.0,
+		output_normal: 10.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "gpt-6-luna",
+		input_cached: Some(0.01),
+		input_normal: 0.1,
+		output_normal: 0.5,
+		output_reasoning: None,
+	},
+	ModelPricing {
 		name: "gpt-5.6-sol",
 		input_cached: Some(0.4),
 		input_normal: 4.0,
