@@ -104,4 +104,32 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		output_normal: 5.0,
 		output_reasoning: None,
 	},
+	ModelPricing {
+		name: "claude-sonnet-5-5",
+		input_cached: Some(0.2),
+		input_normal: 2.0,
+		output_normal: 10.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "claude-opus-4",
+		input_cached: Some(1.5),
+		input_normal: 15.0,
+		output_normal: 75.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "claude-sonnet-4",
+		input_cached: Some(0.3),
+		input_normal: 3.0,
+		output_normal: 15.0,
+		output_reasoning: None,
+	},
+	ModelPricing {
+		name: "claude-3-5-haiku",
+		input_cached: Some(0.08),
+		input_normal: 0.8,
+		output_normal: 4.0,
+		output_reasoning: None,
+	},
 ];

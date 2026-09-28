@@ -1,7 +1,7 @@
 # Options
 
 ```toml
-model = "flash"
+model = "luna"
 input_concurrency = 6
 ```
 
