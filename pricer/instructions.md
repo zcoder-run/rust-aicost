@@ -2,14 +2,6 @@
 
 Create/update the json version of this model name/pricing. 
 
-# kimi
-
-- Make k3 and k2.7 `recent: true` the rest `recent: false`
-
-# xai
-
-- Make sure only the latest models version have the `recent: true` others should be `recent: false` (per model name)
-
 # openai
 
 - Make sure all models are all lowercase
@@ -23,6 +15,32 @@ Create/update the json version of this model name/pricing.
   - only take the Text tokens section, ignore the other sections.
   - there are not cash write, so, only input and cached when present, and then the output.
   - Only take the price and names for the lesser context tokens, when there is multiple (do not have the `(.... context ..)` in the name)
+
+# anthropic
+
+- Make sure all models are all lowercase
+- For haiku, take the price of the below 100k for now. 
+- For Anthropic
+  - Here are the correct patterns to usefor the anthropic models (use use `-` rather than `.` in the model names)
+    - `claude-opus-4-5`, ...,  `claude-sonnet-4-5`, `claude-haiku-4-5`
+    - `claude-opus-4-1`, `claude-sonnet-4`,
+    - `claude-3-7-sonnet`, `claude-opus-4`, `claude-3-5-haiku`
+  - So match the model names in the pages to those one.
+  - For Anthropic Models (Claude), Make sure to have only one `recent: true` for each model type, Sonnet, Haiku, Opus, Fable. Pick the highest number for each of them to mark as `recent: true`
+  - Make sure to remove / not add the "deprecated" ones
+  - For Anthropic Models (Claude), the name/value is inverse. For value, and then, label of this value.
+  - For Anthropic Models (Claude), when caching write value, put it in `.cache_write`, and then, the cache value goes in `.cached`
+  - For Anthropic Models, cache write price, take the `5m` price
+  - For Anthropic models (Claude), make sure you get the model names from the model is, and remove the `-2025...`
+
+# kimi
+
+- Make k3 and k2.7 `recent: true` the rest `recent: false`
+
+# xai
+
+- Make sure only the latest models version have the `recent: true` others should be `recent: false` (per model name)
+
 
 # fireworks
 
@@ -50,21 +68,6 @@ Create/update the json version of this model name/pricing.
 - For now, only the `deepseek-flash` is `recent: true`
 - The other models are legacy
 
-# anthropic
-
-- Make sure all models are all lowercase
-- For Anthropic
-  - Here are the correct patterns to usefor the anthropic models (use use `-` rather than `.` in the model names)
-    - `claude-opus-4-5`, ...,  `claude-sonnet-4-5`, `claude-haiku-4-5`
-    - `claude-opus-4-1`, `claude-sonnet-4`,
-    - `claude-3-7-sonnet`, `claude-opus-4`, `claude-3-5-haiku`
-  - So match the model names in the pages to those one.
-  - For Anthropic Models (Claude), Make sure to have only one `recent: true` for each model type, Sonnet, Haiku, Opus, Fable. Pick the highest number for each of them to mark as `recent: true`
-  - Make sure to remove / not add the "deprecated" ones
-  - For Anthropic Models (Claude), the name/value is inverse. For value, and then, label of this value.
-  - For Anthropic Models (Claude), when caching write value, put it in `.cache_write`, and then, the cache value goes in `.cached`
-  - For Anthropic Models, cache write price, take the `5m` price
-  - For Anthropic models (Claude), make sure you get the model names from the model is, and remove the `-2025...`
 
 # gemini
 
