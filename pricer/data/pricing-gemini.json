@@ -1,6 +1,16 @@
 {
   "models": [
     {
+      "name": "gemini-4-argon",
+      "input": {
+        "cache_write": null,
+        "cached": 0.2,
+        "normal": 4
+      },
+      "output": 20,
+      "recent": true
+    },
+    {
       "name": "gemini-3.8-flash",
       "input": {
         "cache_write": null,
@@ -78,7 +88,7 @@
         "normal": 2
       },
       "output": 12,
-      "recent": true
+      "recent": false
     },
     {
       "name": "gemini-3.1-flash-image",
@@ -181,6 +191,26 @@
       "recent": false
     },
     {
+      "name": "gemini-embedding-2",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.2
+      },
+      "output": 0,
+      "recent": true
+    },
+    {
+      "name": "gemini-embedding",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 0.15
+      },
+      "output": 0,
+      "recent": false
+    },
+    {
       "name": "gemini-robotics-er-1.6",
       "input": {
         "cache_write": null,
@@ -198,7 +228,7 @@
         "normal": 1.25
       },
       "output": 10,
-      "recent": true
+      "recent": false
     },
     {
       "name": "gemini-flash-latest",
