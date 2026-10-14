@@ -72,6 +72,7 @@ Create/update the json version of this model name/pricing.
 # gemini
 
 - Make sure all models are all lowercase
+- For argon, take the post december price. 
 - For gemini models,
   - For gemini models there is no `caching write`, so cache value is for the `.cached` property.
   - For Gemini models, do not add the audio or tts model.
