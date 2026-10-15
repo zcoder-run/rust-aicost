@@ -123,6 +123,8 @@ fn normalize_model_name(model_name: &str) -> &str {
 fn normalize_provider_type(provider_type: &str) -> &str {
 	if provider_type == "openai_resp" {
 		"openai"
+	} else if provider_type == "gemini_ix" {
+		"gemini"
 	} else {
 		provider_type
 	}
