@@ -131,6 +131,11 @@ Create a pricing JSON for this provider, following the following rules:
 - If caching price not available, set to `null`
 - If price has text and audio, take the text price
 - When decimal, do not end with 0s. Just up to the number.
+- Capture `tiers` only for pricing based on prompt size, for example "prompts over 100,000 tokens".
+- `above_prompt_tokens` is the "up to" limit of the previous range. A tier applies when the prompt tokens are strictly greater than it.
+- The base prices are the lowest range. Sort `tiers` ascending by `above_prompt_tokens`.
+- Omit `tiers` when the model has no prompt-size pricing.
+- Never capture batch, fast mode, data residency, 1h cache write, or server tool prices as tiers.
 
 with following schema
 
@@ -145,6 +150,15 @@ with following schema
                 normal: number | null,
             },
             output: number,
+            tiers?: {
+                above_prompt_tokens: number,
+                input: {
+                    cache_write: number | null,
+                    cached: number | null,
+                    normal: number | null,
+                },
+                output: number,
+            }[],
             recent: boolean, // default true if not sure
         }[]
 }

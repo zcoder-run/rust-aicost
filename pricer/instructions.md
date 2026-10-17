@@ -2,6 +2,9 @@
 
 Create/update the json version of this model name/pricing. 
 
+- Capture `cache_write` when the provider publishes it, otherwise `null`.
+- Capture prompt-size `tiers` following the schema, only when the provider publishes prompt-size pricing.
+
 # openai
 
 - Make sure all models are all lowercase
@@ -9,6 +12,7 @@ Create/update the json version of this model name/pricing.
   - Now, only 6 or above are marked recent, only the last of each type. Others are false. 
   - Only take the "standards" pricing,
   - set `cache_write: null` when not defined.
+  - When the same model has longer-context prices that depend on prompt size, capture them as `tiers` instead of dropping them.
   - ignore the legacy models
   - Do not add the gpt-image-1 or audio models
   - ignore the lines have have dates like text, like `2024-05-13`
@@ -19,7 +23,8 @@ Create/update the json version of this model name/pricing.
 # anthropic
 
 - Make sure all models are all lowercase
-- For haiku, take the price of the below 100k for now. 
+- For Claude Haiku 5.5, the base prices are for prompts up to 100,000 tokens, and capture one tier with `above_prompt_tokens: 100000` for prompts over 100,000 tokens.
+- For Anthropic models, the `5m` cache write price applies to the base prices and every tier, and the cache read price comes from the "Cache hits and refreshes" column.
 - For Anthropic
   - Here are the correct patterns to usefor the anthropic models (use use `-` rather than `.` in the model names)
     - `claude-opus-4-5`, ...,  `claude-sonnet-4-5`, `claude-haiku-4-5`
@@ -74,6 +79,7 @@ Create/update the json version of this model name/pricing.
 - Make sure all models are all lowercase
 - For argon, take the post december price. 
 - gemini-3.1-pro and below are now recent: false
+- If the page shows prices that depend on prompt length, for example "prompts <= 200k" and "> 200k", capture the lower range as the base prices and the higher range as a `tiers` entry, instead of a single price.
 - For gemini models,
   - For gemini models there is no `caching write`, so cache value is for the `.cached` property.
   - For Gemini models, do not add the audio or tts model.

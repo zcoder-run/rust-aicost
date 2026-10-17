@@ -1,4 +1,4 @@
-use crate::{ModelPricing, ProviderPricing};
+use crate::{ModelPricing, ProviderPricing, TokenPrices};
 
 pub const MINIMAX: ProviderPricing = ProviderPricing {
 	name: "minimax",
@@ -8,23 +8,35 @@ pub const MINIMAX: ProviderPricing = ProviderPricing {
 const MINIMAX_MODELS: &[ModelPricing] = &[
 	ModelPricing {
 		name: "MiniMax-M3",
-		input_cached: Some(0.06),
-		input_normal: 0.3,
-		output_normal: 1.2,
-		output_reasoning: None,
+		prices: TokenPrices {
+			input_normal: 0.3,
+			input_cached: Some(0.06),
+			input_cache_write: None,
+			output_normal: 1.2,
+			output_reasoning: None,
+		},
+		tiers: &[],
 	},
 	ModelPricing {
 		name: "MiniMax-M2.7",
-		input_cached: Some(0.06),
-		input_normal: 0.3,
-		output_normal: 1.2,
-		output_reasoning: None,
+		prices: TokenPrices {
+			input_normal: 0.3,
+			input_cached: Some(0.06),
+			input_cache_write: None,
+			output_normal: 1.2,
+			output_reasoning: None,
+		},
+		tiers: &[],
 	},
 	ModelPricing {
 		name: "MiniMax-M2.7-highspeed",
-		input_cached: Some(0.06),
-		input_normal: 0.6,
-		output_normal: 2.4,
-		output_reasoning: None,
+		prices: TokenPrices {
+			input_normal: 0.6,
+			input_cached: Some(0.06),
+			input_cache_write: None,
+			output_normal: 2.4,
+			output_reasoning: None,
+		},
+		tiers: &[],
 	},
 ];

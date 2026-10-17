@@ -13,7 +13,7 @@ local inputs = p_utils.load_inputs()
 for _, input in ipairs(inputs) do
   input.rust_file_path = "src/data/data_" .. input.name .. ".rs"
   local provider_upper = string.upper(input.name:gsub("%W", "_"))
-  local rust_content = "use crate::{ModelPricing, ProviderPricing};\n\n"
+  local rust_content = "use crate::{ModelPricing, ProviderPricing, TokenPrices};\n\n"
       .. "pub const " .. provider_upper .. ": ProviderPricing = ProviderPricing {\n"
       .. "\tname: \"" .. input.name .. "\",\n"
       .. "\tmodels: " .. provider_upper .. "_MODELS,\n"
@@ -76,7 +76,7 @@ You must use this data to update (or create) the Rust pricing file `{{data.rust_
 
 ### Rust File Template
 ```rust
-use crate::run::pricing::{ModelPricing, ProviderPricing};
+use crate::{ModelPricing, ProviderPricing, TokenPrices};
 
 pub const [PROVIDER_UPPER]: ProviderPricing = ProviderPricing {
 	name: "{{data.provider_name}}",
@@ -85,6 +85,17 @@ pub const [PROVIDER_UPPER]: ProviderPricing = ProviderPricing {
 
 const [PROVIDER_UPPER]_MODELS: &[ModelPricing] = &[
     // Entries from JSON go here
+    ModelPricing {
+        name: "model-name",
+        prices: TokenPrices {
+            input_normal: 1.0,
+            input_cached: Some(0.1),
+            input_cache_write: Some(1.25),
+            output_normal: 5.0,
+            output_reasoning: None,
+        },
+        tiers: &[],
+    },
 ];
 ```
 *(Note: Replace `[PROVIDER_UPPER]` with the uppercase version of `{{data.provider_name}}`. For example, if provider is `openai`, use `OPENAI` and `OPENAI_MODELS`)*
@@ -95,17 +106,23 @@ const [PROVIDER_UPPER]_MODELS: &[ModelPricing] = &[
 1. Use `FILE_PATCH` to update the existing file or `FILE_NEW` to create it if it's missing.
 2. The JSON data is the authoritative source for pricing values.
 3. For each model in the JSON:
-   - Map `name` to `ModelPricing.name`.
-   - Map `input.cached` to `ModelPricing.input_cached` (use `Some(f64)` or `None`).
-   - Map `input.normal` to `ModelPricing.input_normal`.
-   - Map `output` to `ModelPricing.output_normal`.
-   - Set `output_reasoning` to `None` unless it's already specified in the Rust file context with a value.
+   - Map `name` to `name`.
+   - Map `input.normal` to `prices.input_normal`.
+   - Map `input.cached` to `prices.input_cached` (use `Some(f64)` or `None`).
+   - Map `input.cache_write` to `prices.input_cache_write` (use `Some(f64)` or `None`).
+   - Map `output` to `prices.output_normal`.
+   - Keep an existing `output_reasoning` value, otherwise use `None`.
+   - Map `tiers` to `tiers: &[PricingTier { above_prompt_tokens: N, prices: TokenPrices { ... } }]`, sorted ascending by `above_prompt_tokens`, and use `tiers: &[]` when absent or empty.
 4. **Naming Conversions**:
    - For OpenAI: Remove the `openai-` prefix from the model name (e.g., `openai-gpt-4o` becomes `gpt-4o`).
    - For Gemini: Remove the `-preview` suffix (e.g., `gemini-2.5-pro-preview` becomes `gemini-2.5-pro`).
 5. **Preserve exact formatting and all comments** present in the existing file.
 6. Only update the model entries. Do not remove existing entries unless they are duplicate or clearly replaced by the JSON data.
-7. Only return the `<FILE_CHANGES>` container.
+7. Only return the `UDIFFX_FILE_CHANGES` block.
+8. **Formatting**:
+   - Write `f64` literals with `.0` for whole numbers, for example `5.0`.
+   - Write integer thresholds with `_` separators, for example `100_000`.
+   - Import `PricingTier` only when the file uses it in `tiers`.
 
 # Output
 

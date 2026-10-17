@@ -14,6 +14,36 @@ pub fn compute(provider_type: &str, model_name: &str, usage: &Usage) -> Result<A
 	let model = find_model_entry(provider_type, model_name)
 		.ok_or_else(|| Error::ModelNotFound(provider_type.to_string(), model_name.to_string()))?;
 
+	Ok(compute_with_pricing(model, usage))
+}
+
+/// Calculates the cost for a given `ModelIden` and usage.
+pub fn compute_iden(model_iden: &ModelIden, usage: &Usage) -> Result<AiCost> {
+	let provider_type = model_iden.adapter_kind.as_lower_str();
+	let model_name = &*model_iden.model_name;
+
+	compute(provider_type, model_name, usage)
+}
+
+pub fn model_pricing(model_iden: &ModelIden) -> Option<ModelPricing> {
+	let provider_type = model_iden.adapter_kind.as_lower_str();
+	let model_name = &*model_iden.model_name;
+
+	let model_name = normalize_model_name(model_name);
+
+	let provider_type = normalize_provider_type(provider_type);
+
+	find_model_entry(provider_type, model_name).copied()
+}
+
+// region:    --- Support
+
+/// Computes the cost of `usage` with the given model pricing (tier resolved by prompt tokens).
+fn compute_with_pricing(model: &ModelPricing, usage: &Usage) -> AiCost {
+	// -- Resolve the prices for the prompt size tier
+	let tier_prompt_tokens = usage.prompt_tokens.unwrap_or(0).max(0) as u32;
+	let prices = model.prices_for(tier_prompt_tokens);
+
 	// -- Extract prompt related tokens and pricing
 	let prompt_tokens = usage.prompt_tokens.unwrap_or(0) as f64;
 	// Extract cached vs normal prompt tokens
@@ -28,10 +58,11 @@ pub fn compute(provider_type: &str, model_name: &str, usage: &Usage) -> Result<A
 		None => (prompt_tokens, 0.0, 0.0),
 	};
 	// Extract prompt prices
-	let price_prompt_normal = model.input_normal;
-	let price_prompt_cached = model.input_cached.unwrap_or(price_prompt_normal);
+	let price_prompt_normal = prices.input_normal;
+	let price_prompt_cached = prices.input_cached.unwrap_or(price_prompt_normal);
 	// Note:  For now, for cache_creation_tokens assume * 1.25 for cache_creation_tokens (which is Anthropic rules, and this is only anthropic data)
-	let price_prompt_cache_creation = 1.25 * price_prompt_normal;
+	// Note: The 1.25x is now only the fallback when the model has no explicit input_cache_write price.
+	let price_prompt_cache_creation = prices.input_cache_write.unwrap_or(1.25 * price_prompt_normal);
 
 	// -- Extract completion related tokens and pricing
 	let completion_tokens = usage.completion_tokens.unwrap_or(0) as f64;
@@ -44,8 +75,8 @@ pub fn compute(provider_type: &str, model_name: &str, usage: &Usage) -> Result<A
 	} else {
 		(completion_tokens, 0.)
 	};
-	let price_completion_normal = model.output_normal;
-	let price_completion_reasoning = model.output_reasoning.unwrap_or(price_completion_normal);
+	let price_completion_normal = prices.output_normal;
+	let price_completion_reasoning = prices.output_reasoning.unwrap_or(price_completion_normal);
 
 	// -- Compute individual cost components (raw)
 	let cost_prompt_normal = prompt_tokens_normal * price_prompt_normal / 1_000_000.0;
@@ -75,7 +106,7 @@ pub fn compute(provider_type: &str, model_name: &str, usage: &Usage) -> Result<A
 		0.0
 	};
 
-	Ok(AiCost {
+	AiCost {
 		total,
 
 		// -- input
@@ -89,29 +120,8 @@ pub fn compute(provider_type: &str, model_name: &str, usage: &Usage) -> Result<A
 		output_total,
 		output_normal,
 		output_reasoning,
-	})
+	}
 }
-
-/// Calculates the cost for a given `ModelIden` and usage.
-pub fn compute_iden(model_iden: &ModelIden, usage: &Usage) -> Result<AiCost> {
-	let provider_type = model_iden.adapter_kind.as_lower_str();
-	let model_name = &*model_iden.model_name;
-
-	compute(provider_type, model_name, usage)
-}
-
-pub fn model_pricing(model_iden: &ModelIden) -> Option<ModelPricing> {
-	let provider_type = model_iden.adapter_kind.as_lower_str();
-	let model_name = &*model_iden.model_name;
-
-	let model_name = normalize_model_name(model_name);
-
-	let provider_type = normalize_provider_type(provider_type);
-
-	find_model_entry(provider_type, model_name).copied()
-}
-
-// region:    --- Support
 
 fn normalize_model_name(model_name: &str) -> &str {
 	match model_name.split_once("::") {
@@ -154,6 +164,7 @@ fn find_model_entry(provider_type: &str, model_name: &str) -> Option<&'static Mo
 mod tests {
 	use super::*;
 	use genai::chat::{PromptTokensDetails, Usage};
+use crate::{PricingTier, TokenPrices};
 
 	type TestResult = std::result::Result<(), Box<dyn std::error::Error>>;
 
@@ -263,6 +274,125 @@ mod tests {
 
 		Ok(())
 	}
+
+	#[test]
+	fn test_cost_compute_with_pricing_cache_write_explicit() -> TestResult {
+		// -- Setup & Fixtures
+		let usage = Usage {
+			prompt_tokens: Some(600),
+			prompt_tokens_details: Some(PromptTokensDetails {
+				cache_creation_tokens: Some(200),
+				..Default::default()
+			}),
+			..Default::default()
+		};
+
+		// -- Exec
+		let ai_cost = compute_with_pricing(&FX_MODEL, &usage);
+
+		// -- Check
+		assert!((ai_cost.input_cache_write - 0.0004).abs() < 1e-9);
+		assert!((ai_cost.input_normal - 0.0004).abs() < 1e-9);
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_cost_compute_with_pricing_cache_write_fallback() -> TestResult {
+		// -- Setup & Fixtures
+		let usage = Usage {
+			prompt_tokens: Some(600),
+			prompt_tokens_details: Some(PromptTokensDetails {
+				cache_creation_tokens: Some(200),
+				..Default::default()
+			}),
+			..Default::default()
+		};
+
+		// -- Exec
+		let ai_cost = compute_with_pricing(&FX_MODEL_NO_CACHE_WRITE, &usage);
+
+		// -- Check
+		assert!((ai_cost.input_cache_write - 0.00025).abs() < 1e-9);
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_cost_compute_with_pricing_tier_at_threshold() -> TestResult {
+		// -- Setup & Fixtures
+		let usage = Usage {
+			prompt_tokens: Some(1000),
+			completion_tokens: Some(100),
+			..Default::default()
+		};
+
+		// -- Exec
+		let ai_cost = compute_with_pricing(&FX_MODEL, &usage);
+
+		// -- Check
+		assert!((ai_cost.input_normal - 0.001).abs() < 1e-9);
+		assert!((ai_cost.output_normal - 0.0005).abs() < 1e-9);
+		assert!((ai_cost.total - 0.0015).abs() < 1e-9);
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_cost_compute_with_pricing_tier_above_threshold() -> TestResult {
+		// -- Setup & Fixtures
+		let usage = Usage {
+			prompt_tokens: Some(1001),
+			completion_tokens: Some(100),
+			..Default::default()
+		};
+
+		// -- Exec
+		let ai_cost = compute_with_pricing(&FX_MODEL, &usage);
+
+		// -- Check
+		assert!((ai_cost.input_normal - 0.002002).abs() < 1e-9);
+		assert!((ai_cost.output_normal - 0.001).abs() < 1e-9);
+		assert!((ai_cost.total - 0.003002).abs() < 1e-9);
+
+		Ok(())
+	}
+
+	// -- Test Support
+	const FX_TIERS: &[PricingTier] = &[PricingTier {
+		above_prompt_tokens: 1_000,
+		prices: TokenPrices {
+			input_normal: 2.0,
+			input_cached: Some(0.2),
+			input_cache_write: Some(4.0),
+			output_normal: 10.0,
+			output_reasoning: None,
+		},
+	}];
+
+	const FX_MODEL: ModelPricing = ModelPricing {
+		name: "fx-model",
+		prices: TokenPrices {
+			input_normal: 1.0,
+			input_cached: Some(0.1),
+			input_cache_write: Some(2.0),
+			output_normal: 5.0,
+			output_reasoning: None,
+		},
+		tiers: FX_TIERS,
+	};
+
+	const FX_MODEL_NO_CACHE_WRITE: ModelPricing = ModelPricing {
+		name: "fx-model-no-cache-write",
+		prices: TokenPrices {
+			input_normal: 1.0,
+			input_cached: Some(0.1),
+			input_cache_write: None,
+			output_normal: 5.0,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	};
 }
 
 // endregion: --- Tests
