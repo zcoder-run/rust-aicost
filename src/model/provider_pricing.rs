@@ -1,20 +1,9 @@
-#[derive(Debug, Clone, Copy)]
-pub struct AiCost {
-	pub total: f64,
+// region:    --- Types
 
-	pub input_total: f64,
-	pub input_normal: f64,
-	pub input_cache_read: f64,
-	pub input_cache_write: f64,
-
-	pub output_total: f64,
-	pub output_normal: f64,
-	pub output_reasoning: f64,
-
-	pub input_cache_saving: f64,
-
-	/// The pricing tier applied, `None` when the base prices were used.
-	pub tier: Option<TierInfo>,
+#[derive(Debug)]
+pub struct ProviderPricing {
+	pub name: &'static str,
+	pub models: &'static [ModelPricing],
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -27,25 +16,11 @@ pub struct ModelPricing {
 	pub tiers: &'static [PricingTier],
 }
 
-#[derive(Debug)]
-pub struct ProviderPricing {
-	pub name: &'static str,
-	pub models: &'static [ModelPricing],
-}
-
 #[derive(Debug, Clone, Copy)]
 pub struct PricingTier {
 	/// Tier applies when the total prompt tokens are strictly greater than this value.
 	pub above_prompt_tokens: u32,
 	pub prices: TokenPrices,
-}
-
-/// Prices in USD per 1,000,000 tokens.
-/// Information about the pricing tier applied to a cost computation.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct TierInfo {
-	/// The `above_prompt_tokens` threshold of the applied tier.
-	pub above_prompt_tokens: u32,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -56,6 +31,8 @@ pub struct TokenPrices {
 	pub output_normal: f64,
 	pub output_reasoning: Option<f64>,
 }
+
+// endregion: --- Types
 
 impl ModelPricing {
 	/// Returns the highest tier whose threshold is strictly exceeded, or `None` for the base prices.
