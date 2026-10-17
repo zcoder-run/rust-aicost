@@ -12,6 +12,9 @@ pub struct AiCost {
 	pub output_reasoning: f64,
 
 	pub input_cache_saving: f64,
+
+	/// The pricing tier applied, `None` when the base prices were used.
+	pub tier: Option<TierInfo>,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -38,6 +41,13 @@ pub struct PricingTier {
 }
 
 /// Prices in USD per 1,000,000 tokens.
+/// Information about the pricing tier applied to a cost computation.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct TierInfo {
+	/// The `above_prompt_tokens` threshold of the applied tier.
+	pub above_prompt_tokens: u32,
+}
+
 #[derive(Debug, Clone, Copy)]
 pub struct TokenPrices {
 	pub input_normal: f64,
@@ -48,14 +58,14 @@ pub struct TokenPrices {
 }
 
 impl ModelPricing {
+	/// Returns the highest tier whose threshold is strictly exceeded, or `None` for the base prices.
+	pub fn tier_for(&self, prompt_tokens: u32) -> Option<&PricingTier> {
+		self.tiers.iter().rev().find(|t| prompt_tokens > t.above_prompt_tokens)
+	}
+
 	/// Returns the prices of the highest tier whose threshold is strictly exceeded, or the base prices.
 	pub fn prices_for(&self, prompt_tokens: u32) -> &TokenPrices {
-		self.tiers
-			.iter()
-			.rev()
-			.find(|t| prompt_tokens > t.above_prompt_tokens)
-			.map(|t| &t.prices)
-			.unwrap_or(&self.prices)
+		self.tier_for(prompt_tokens).map(|t| &t.prices).unwrap_or(&self.prices)
 	}
 }
 
@@ -158,6 +168,48 @@ mod tests {
 
 		// -- Check
 		assert_eq!(prices.input_normal, 1.0);
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_model_model_pricing_tier_for_none_at_threshold() -> Result<()> {
+		// -- Setup & Fixtures
+		let model = FX_MODEL;
+
+		// -- Exec
+		let tier = model.tier_for(1_000);
+
+		// -- Check
+		assert!(tier.is_none());
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_model_model_pricing_tier_for_above_threshold() -> Result<()> {
+		// -- Setup & Fixtures
+		let model = FX_MODEL;
+
+		// -- Exec
+		let tier = model.tier_for(1_001).ok_or("Should have a tier above 1_000")?;
+
+		// -- Check
+		assert_eq!(tier.above_prompt_tokens, 1_000);
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_model_model_pricing_tier_for_no_tiers() -> Result<()> {
+		// -- Setup & Fixtures
+		let model = FX_MODEL_NO_TIERS;
+
+		// -- Exec
+		let tier = model.tier_for(u32::MAX);
+
+		// -- Check
+		assert!(tier.is_none());
 
 		Ok(())
 	}

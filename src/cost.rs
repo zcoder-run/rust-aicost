@@ -1,5 +1,5 @@
 use crate::data::PROVIDERS;
-use crate::{AiCost, Error, ModelPricing, Result};
+use crate::{AiCost, Error, ModelPricing, Result, TierInfo};
 use genai::ModelIden;
 use genai::chat::Usage;
 
@@ -42,7 +42,8 @@ pub fn model_pricing(model_iden: &ModelIden) -> Option<ModelPricing> {
 fn compute_with_pricing(model: &ModelPricing, usage: &Usage) -> AiCost {
 	// -- Resolve the prices for the prompt size tier
 	let tier_prompt_tokens = usage.prompt_tokens.unwrap_or(0).max(0) as u32;
-	let prices = model.prices_for(tier_prompt_tokens);
+	let tier = model.tier_for(tier_prompt_tokens);
+	let prices = tier.map(|t| &t.prices).unwrap_or(&model.prices);
 
 	// -- Extract prompt related tokens and pricing
 	let prompt_tokens = usage.prompt_tokens.unwrap_or(0) as f64;
@@ -120,6 +121,11 @@ fn compute_with_pricing(model: &ModelPricing, usage: &Usage) -> AiCost {
 		output_total,
 		output_normal,
 		output_reasoning,
+
+		// -- tier
+		tier: tier.map(|t| TierInfo {
+			above_prompt_tokens: t.above_prompt_tokens,
+		}),
 	}
 }
 
@@ -189,6 +195,7 @@ use crate::{PricingTier, TokenPrices};
 		assert!((price - expected).abs() < f64::EPSILON);
 		assert!(ai_cost.input_cache_write == 0.0);
 		assert!(ai_cost.input_cache_saving == 0.0);
+		assert_eq!(ai_cost.tier, None);
 
 		Ok(())
 	}
@@ -334,6 +341,7 @@ use crate::{PricingTier, TokenPrices};
 		assert!((ai_cost.input_normal - 0.001).abs() < 1e-9);
 		assert!((ai_cost.output_normal - 0.0005).abs() < 1e-9);
 		assert!((ai_cost.total - 0.0015).abs() < 1e-9);
+		assert_eq!(ai_cost.tier, None);
 
 		Ok(())
 	}
@@ -354,6 +362,7 @@ use crate::{PricingTier, TokenPrices};
 		assert!((ai_cost.input_normal - 0.002002).abs() < 1e-9);
 		assert!((ai_cost.output_normal - 0.001).abs() < 1e-9);
 		assert!((ai_cost.total - 0.003002).abs() < 1e-9);
+		assert_eq!(ai_cost.tier, Some(TierInfo { above_prompt_tokens: 1_000 }));
 
 		Ok(())
 	}

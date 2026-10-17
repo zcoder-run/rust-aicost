@@ -7,6 +7,6 @@ mod model;
 
 pub use cost::{compute, compute_iden, model_pricing};
 pub use error::{Error, Result};
-pub use model::{AiCost, ModelPricing, PricingTier, ProviderPricing, TokenPrices};
+pub use model::{AiCost, ModelPricing, PricingTier, ProviderPricing, TierInfo, TokenPrices};
 
 // endregion: --- Modules

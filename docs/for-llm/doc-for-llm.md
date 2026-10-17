@@ -23,6 +23,7 @@ pub struct AiCost {
     pub output_normal: f64,
     pub output_reasoning: f64,
     pub input_cache_saving: f64,
+    pub tier: Option<TierInfo>,
 }
 ```
 
@@ -57,6 +58,18 @@ pub struct TokenPrices {
 
 `ModelPricing::prices_for(prompt_tokens)` returns the `TokenPrices` of the highest tier whose `above_prompt_tokens` is exceeded, or the base `prices` when none applies.
 
+`ModelPricing::tier_for(prompt_tokens)` returns the `PricingTier` of that highest tier, or `None` when the base `prices` apply.
+
+### TierInfo
+
+```rust
+pub struct TierInfo {
+    pub above_prompt_tokens: u32,
+}
+```
+
+`TierInfo` identifies the applied tier in `AiCost.tier`, and is `None` when the base prices were used.
+
 ## Internal Logic
 
 - **Normalization**: Provider `openai_resp` is mapped to `openai`. Model names have prefixes before `::` removed (e.g., `namespace::model` becomes `model`).
@@ -65,7 +78,7 @@ pub struct TokenPrices {
     - `input_cache_read` uses `usage.prompt_tokens_details.cached_tokens`.
     - `input_cache_write` uses `usage.prompt_tokens_details.cache_creation_tokens` (priced at `input_cache_write`, falling back to 1.25x `input_normal` when absent).
 - **Reasoning**: `output_reasoning` uses `usage.completion_tokens_details.reasoning_tokens`.
-- **Tiers**: the tier basis is `usage.prompt_tokens`. A tier applies when the prompt tokens are strictly greater than `above_prompt_tokens`. The whole request is billed at the selected tier.
+- **Tiers**: the tier basis is `usage.prompt_tokens`. A tier applies when the prompt tokens are strictly greater than `above_prompt_tokens`. The whole request is billed at the selected tier. `AiCost.tier` is `Some(TierInfo)` when a tier was applied, and `None` for base prices.
 - **Rounding**: Costs are rounded to 6 decimal places.
 
 ## Supported Providers
