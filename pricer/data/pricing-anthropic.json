@@ -148,6 +148,17 @@
         "normal": 0.1
       },
       "output": 0.5,
+      "tiers": [
+        {
+          "above_prompt_tokens": 100000,
+          "input": {
+            "cache_write": 0.625,
+            "cached": 0.05,
+            "normal": 0.5
+          },
+          "output": 2.5
+        }
+      ],
       "recent": true
     },
     {

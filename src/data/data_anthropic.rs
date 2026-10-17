@@ -1,4 +1,4 @@
-use crate::{ModelPricing, ProviderPricing, TokenPrices};
+use crate::{ModelPricing, PricingTier, ProviderPricing, TokenPrices};
 
 pub const ANTHROPIC: ProviderPricing = ProviderPricing {
 	name: "anthropic",
@@ -11,7 +11,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 10.0,
 			input_cached: Some(0.25),
-			input_cache_write: None,
+			input_cache_write: Some(12.5),
 			output_normal: 50.0,
 			output_reasoning: None,
 		},
@@ -22,7 +22,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 10.0,
 			input_cached: Some(0.25),
-			input_cache_write: None,
+			input_cache_write: Some(12.5),
 			output_normal: 50.0,
 			output_reasoning: None,
 		},
@@ -33,7 +33,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 10.0,
 			input_cached: Some(1.0),
-			input_cache_write: None,
+			input_cache_write: Some(12.5),
 			output_normal: 50.0,
 			output_reasoning: None,
 		},
@@ -44,7 +44,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 10.0,
 			input_cached: Some(1.0),
-			input_cache_write: None,
+			input_cache_write: Some(12.5),
 			output_normal: 50.0,
 			output_reasoning: None,
 		},
@@ -55,7 +55,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 4.0,
 			input_cached: Some(0.2),
-			input_cache_write: None,
+			input_cache_write: Some(5.0),
 			output_normal: 20.0,
 			output_reasoning: None,
 		},
@@ -66,7 +66,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 5.0,
 			input_cached: Some(0.5),
-			input_cache_write: None,
+			input_cache_write: Some(6.25),
 			output_normal: 25.0,
 			output_reasoning: None,
 		},
@@ -77,7 +77,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 5.0,
 			input_cached: Some(0.5),
-			input_cache_write: None,
+			input_cache_write: Some(6.25),
 			output_normal: 25.0,
 			output_reasoning: None,
 		},
@@ -88,7 +88,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 5.0,
 			input_cached: Some(0.5),
-			input_cache_write: None,
+			input_cache_write: Some(6.25),
 			output_normal: 25.0,
 			output_reasoning: None,
 		},
@@ -99,7 +99,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 5.0,
 			input_cached: Some(0.5),
-			input_cache_write: None,
+			input_cache_write: Some(6.25),
 			output_normal: 25.0,
 			output_reasoning: None,
 		},
@@ -110,7 +110,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 5.0,
 			input_cached: Some(0.5),
-			input_cache_write: None,
+			input_cache_write: Some(6.25),
 			output_normal: 25.0,
 			output_reasoning: None,
 		},
@@ -121,7 +121,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 2.0,
 			input_cached: Some(0.2),
-			input_cache_write: None,
+			input_cache_write: Some(2.5),
 			output_normal: 10.0,
 			output_reasoning: None,
 		},
@@ -132,7 +132,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 2.0,
 			input_cached: Some(0.2),
-			input_cache_write: None,
+			input_cache_write: Some(2.5),
 			output_normal: 10.0,
 			output_reasoning: None,
 		},
@@ -143,7 +143,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 3.0,
 			input_cached: Some(0.3),
-			input_cache_write: None,
+			input_cache_write: Some(3.75),
 			output_normal: 15.0,
 			output_reasoning: None,
 		},
@@ -154,7 +154,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 3.0,
 			input_cached: Some(0.3),
-			input_cache_write: None,
+			input_cache_write: Some(3.75),
 			output_normal: 15.0,
 			output_reasoning: None,
 		},
@@ -165,18 +165,29 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 0.1,
 			input_cached: Some(0.01),
-			input_cache_write: None,
+			input_cache_write: Some(0.125),
 			output_normal: 0.5,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[
+			PricingTier {
+				above_prompt_tokens: 100_000,
+				prices: TokenPrices {
+					input_normal: 0.5,
+					input_cached: Some(0.05),
+					input_cache_write: Some(0.625),
+					output_normal: 2.5,
+					output_reasoning: None,
+				},
+			},
+		],
 	},
 	ModelPricing {
 		name: "claude-haiku-4-5",
 		prices: TokenPrices {
 			input_normal: 1.0,
 			input_cached: Some(0.1),
-			input_cache_write: None,
+			input_cache_write: Some(1.25),
 			output_normal: 5.0,
 			output_reasoning: None,
 		},
