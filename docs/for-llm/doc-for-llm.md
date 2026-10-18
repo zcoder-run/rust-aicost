@@ -8,6 +8,11 @@ LLM cost calculator for Rust, integrating with `genai` crate types.
 - `compute_iden(iden: &ModelIden, usage: &Usage) -> Result<AiCost>`: Calculate cost from `genai::ModelIden`.
 - `model_pricing(iden: &ModelIden) -> Option<ModelPricing>`: Get pricing info for a model.
 
+### Errors
+
+- `Result<T>`: Alias for `std::result::Result<T, Error>`.
+- `Error::ModelNotFound(provider, model)`: Returned by `compute` and `compute_iden` when no pricing entry matches.
+
 ## Data Structures
 
 ### AiCost
@@ -70,16 +75,30 @@ pub struct TierInfo {
 
 `TierInfo` identifies the applied tier in `AiCost.tier`, and is `None` when the base prices were used.
 
+### ProviderPricing
+
+Groups the model pricing entries of one provider. Provider tables are internal data, not reached through the public API.
+
+```rust
+pub struct ProviderPricing {
+    pub name: &'static str,
+    pub models: &'static [ModelPricing],
+}
+```
+
 ## Internal Logic
 
-- **Normalization**: Provider `openai_resp` is mapped to `openai`. Model names have prefixes before `::` removed (e.g., `namespace::model` becomes `model`).
+- **Normalization**: Provider `openai_resp` is mapped to `openai` and `gemini_ix` to `gemini`. Model names have prefixes before `::` removed (e.g., `namespace::model` becomes `model`).
 - **Matching**: Models are matched using longest prefix matching against the provider's model list.
 - **Caching**: 
-    - `input_cache_read` uses `usage.prompt_tokens_details.cached_tokens`.
+    - `input_cache_read` uses `usage.prompt_tokens_details.cached_tokens` (priced at `input_cached`, falling back to `input_normal` when absent).
     - `input_cache_write` uses `usage.prompt_tokens_details.cache_creation_tokens` (priced at `input_cache_write`, falling back to 1.25x `input_normal` when absent).
-- **Reasoning**: `output_reasoning` uses `usage.completion_tokens_details.reasoning_tokens`.
+- **Reasoning**: `output_reasoning` uses `usage.completion_tokens_details.reasoning_tokens` (priced at `output_reasoning`, falling back to `output_normal` when absent).
 - **Tiers**: the tier basis is `usage.prompt_tokens`. A tier applies when the prompt tokens are strictly greater than `above_prompt_tokens`. The whole request is billed at the selected tier. `AiCost.tier` is `Some(TierInfo)` when a tier was applied, and `None` for base prices.
-- **Rounding**: Costs are rounded to 6 decimal places.
+- **Token split**: `prompt_tokens` is the total prompt size. `input_normal` uses `prompt_tokens - cached_tokens - cache_creation_tokens`. Without `prompt_tokens_details`, all prompt tokens are normal. Missing usage counts default to `0`.
+- **Output split**: `output_normal` uses `completion_tokens - reasoning_tokens`.
+- **Cache saving**: `input_cache_saving` is `cached_tokens * (input_normal - cached price) / 1M`, minus the `input_cache_write` cost. It is `0` when there are no cache tokens, and it can be negative when cache writes outweigh read savings.
+- **Rounding**: Each component (`input_normal`, `input_cache_read`, `input_cache_write`, `output_normal`, `output_reasoning`) is rounded to 6 decimal places. Subtotals and `total` are sums of the rounded components, also rounded to 6 decimal places.
 
 ## Supported Providers
 
