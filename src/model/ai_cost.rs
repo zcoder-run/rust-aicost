@@ -23,8 +23,8 @@ pub struct AiCost {
 /// Information about the pricing tier applied to a cost computation.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct TierInfo {
-	/// The `above_prompt_tokens` threshold of the applied tier.
-	pub above_prompt_tokens: u32,
+	/// The index of the applied tier in `ModelPricing::tiers`.
+	pub tier_index: usize,
 }
 
 // endregion: --- Types

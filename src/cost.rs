@@ -42,8 +42,8 @@ pub fn model_pricing(model_iden: &ModelIden) -> Option<ModelPricing> {
 fn compute_with_pricing(model: &ModelPricing, usage: &Usage) -> AiCost {
 	// -- Resolve the prices for the prompt size tier
 	let tier_prompt_tokens = usage.prompt_tokens.unwrap_or(0).max(0) as u32;
-	let tier = model.tier_for(tier_prompt_tokens);
-	let prices = tier.map(|t| &t.prices).unwrap_or(&model.prices);
+	let tier_index = model.tier_index_for(tier_prompt_tokens);
+	let prices = tier_index.map(|i| &model.tiers[i].prices).unwrap_or(&model.prices);
 
 	// -- Extract prompt related tokens and pricing
 	let prompt_tokens = usage.prompt_tokens.unwrap_or(0) as f64;
@@ -123,9 +123,7 @@ fn compute_with_pricing(model: &ModelPricing, usage: &Usage) -> AiCost {
 		output_reasoning,
 
 		// -- tier
-		tier: tier.map(|t| TierInfo {
-			above_prompt_tokens: t.above_prompt_tokens,
-		}),
+		tier: tier_index.map(|i| TierInfo { tier_index: i }),
 	}
 }
 
@@ -362,7 +360,7 @@ use crate::{PricingTier, TokenPrices};
 		assert!((ai_cost.input_normal - 0.002002).abs() < 1e-9);
 		assert!((ai_cost.output_normal - 0.001).abs() < 1e-9);
 		assert!((ai_cost.total - 0.003002).abs() < 1e-9);
-		assert_eq!(ai_cost.tier, Some(TierInfo { above_prompt_tokens: 1_000 }));
+		assert_eq!(ai_cost.tier, Some(TierInfo { tier_index: 0 }));
 
 		Ok(())
 	}

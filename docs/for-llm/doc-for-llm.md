@@ -65,15 +65,17 @@ pub struct TokenPrices {
 
 `ModelPricing::tier_for(prompt_tokens)` returns the `PricingTier` of that highest tier, or `None` when the base `prices` apply.
 
+`ModelPricing::tier_index_for(prompt_tokens)` returns the index of that highest tier in `tiers`, or `None` when the base `prices` apply.
+
 ### TierInfo
 
 ```rust
 pub struct TierInfo {
-    pub above_prompt_tokens: u32,
+    pub tier_index: usize,
 }
 ```
 
-`TierInfo` identifies the applied tier in `AiCost.tier`, and is `None` when the base prices were used.
+`TierInfo` identifies the applied tier in `AiCost.tier`. `tier_index` is the position of that tier in `ModelPricing.tiers`. `AiCost.tier` is `None` when the base prices were used.
 
 ### ProviderPricing
 
@@ -94,7 +96,7 @@ pub struct ProviderPricing {
     - `input_cache_read` uses `usage.prompt_tokens_details.cached_tokens` (priced at `input_cached`, falling back to `input_normal` when absent).
     - `input_cache_write` uses `usage.prompt_tokens_details.cache_creation_tokens` (priced at `input_cache_write`, falling back to 1.25x `input_normal` when absent).
 - **Reasoning**: `output_reasoning` uses `usage.completion_tokens_details.reasoning_tokens` (priced at `output_reasoning`, falling back to `output_normal` when absent).
-- **Tiers**: the tier basis is `usage.prompt_tokens`. A tier applies when the prompt tokens are strictly greater than `above_prompt_tokens`. The whole request is billed at the selected tier. `AiCost.tier` is `Some(TierInfo)` when a tier was applied, and `None` for base prices.
+- **Tiers**: the tier basis is `usage.prompt_tokens`. A tier applies when the prompt tokens are strictly greater than `above_prompt_tokens`. The whole request is billed at the selected tier. `AiCost.tier` is `Some(TierInfo)` with `tier_index` set to the applied tier's position in `tiers` when a tier was applied, and `None` for base prices.
 - **Token split**: `prompt_tokens` is the total prompt size. `input_normal` uses `prompt_tokens - cached_tokens - cache_creation_tokens`. Without `prompt_tokens_details`, all prompt tokens are normal. Missing usage counts default to `0`.
 - **Output split**: `output_normal` uses `completion_tokens - reasoning_tokens`.
 - **Cache saving**: `input_cache_saving` is `cached_tokens * (input_normal - cached price) / 1M`, minus the `input_cache_write` cost. It is `0` when there are no cache tokens, and it can be negative when cache writes outweigh read savings.

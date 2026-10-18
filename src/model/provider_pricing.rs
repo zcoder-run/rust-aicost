@@ -35,9 +35,14 @@ pub struct TokenPrices {
 // endregion: --- Types
 
 impl ModelPricing {
+	/// Returns the index of the highest tier whose threshold is strictly exceeded, or `None` for the base prices.
+	pub fn tier_index_for(&self, prompt_tokens: u32) -> Option<usize> {
+		self.tiers.iter().rposition(|t| prompt_tokens > t.above_prompt_tokens)
+	}
+
 	/// Returns the highest tier whose threshold is strictly exceeded, or `None` for the base prices.
 	pub fn tier_for(&self, prompt_tokens: u32) -> Option<&PricingTier> {
-		self.tiers.iter().rev().find(|t| prompt_tokens > t.above_prompt_tokens)
+		self.tier_index_for(prompt_tokens).map(|i| &self.tiers[i])
 	}
 
 	/// Returns the prices of the highest tier whose threshold is strictly exceeded, or the base prices.
@@ -187,6 +192,20 @@ mod tests {
 
 		// -- Check
 		assert!(tier.is_none());
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_model_model_pricing_tier_index_for_highest_exceeded_tier() -> Result<()> {
+		// -- Setup & Fixtures
+		let model = FX_MODEL;
+
+		// -- Exec
+		let index = model.tier_index_for(2_001);
+
+		// -- Check
+		assert_eq!(index, Some(1));
 
 		Ok(())
 	}
