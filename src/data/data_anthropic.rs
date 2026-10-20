@@ -169,18 +169,16 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 			output_normal: 0.5,
 			output_reasoning: None,
 		},
-		tiers: &[
-			PricingTier {
-				above_prompt_tokens: 100_000,
-				prices: TokenPrices {
-					input_normal: 0.5,
-					input_cached: Some(0.05),
-					input_cache_write: Some(0.625),
-					output_normal: 2.5,
-					output_reasoning: None,
-				},
+		tiers: &[PricingTier {
+			above_prompt_tokens: 100_000,
+			prices: TokenPrices {
+				input_normal: 0.5,
+				input_cached: Some(0.05),
+				input_cache_write: Some(0.625),
+				output_normal: 2.5,
+				output_reasoning: None,
 			},
-		],
+		}],
 	},
 	ModelPricing {
 		name: "claude-haiku-4-5",

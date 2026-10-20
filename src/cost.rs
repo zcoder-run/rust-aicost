@@ -167,8 +167,8 @@ fn find_model_entry(provider_type: &str, model_name: &str) -> Option<&'static Mo
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::{PricingTier, TokenPrices};
 	use genai::chat::{PromptTokensDetails, Usage};
-use crate::{PricingTier, TokenPrices};
 
 	type TestResult = std::result::Result<(), Box<dyn std::error::Error>>;
 
