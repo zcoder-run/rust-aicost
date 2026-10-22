@@ -28,6 +28,7 @@ local base_dir = p_utils.base_dir
 -- TOGETHER  - login models price: https://api.together.ai/models
 --             names In the browser window: console.log($$('td[id]').map(td => td.id).join('\n'));
 -- ZAI       - https://docs.z.ai/guides/overview/pricing (take the md)
+-- KIMI      - https://platform.kimi.ai/docs/pricing/chat
 
 -- Config
 local final_inputs = inputs

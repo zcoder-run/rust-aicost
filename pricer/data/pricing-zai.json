@@ -1,6 +1,16 @@
 {
   "models": [
     {
+      "name": "glm-5.3",
+      "input": {
+        "cache_write": null,
+        "cached": 0.26,
+        "normal": 1.4
+      },
+      "output": 4.4,
+      "recent": true
+    },
+    {
       "name": "glm-5.3-flash",
       "input": {
         "cache_write": null,
@@ -11,13 +21,23 @@
       "recent": true
     },
     {
-      "name": "glm-5.3",
+      "name": "glm-5.3-flashx",
       "input": {
         "cache_write": null,
-        "cached": 0.26,
-        "normal": 1.4
+        "cached": 0.075,
+        "normal": 0.37
       },
-      "output": 4.4,
+      "output": 1.25,
+      "recent": true
+    },
+    {
+      "name": "glm-5.3-flashx-legal",
+      "input": {
+        "cache_write": null,
+        "cached": 0.075,
+        "normal": 0.37
+      },
+      "output": 1.25,
       "recent": true
     },
     {
@@ -51,16 +71,6 @@
       "recent": false
     },
     {
-      "name": "glm-5-turbo",
-      "input": {
-        "cache_write": null,
-        "cached": 0.24,
-        "normal": 1.2
-      },
-      "output": 4,
-      "recent": false
-    },
-    {
       "name": "glm-4.7",
       "input": {
         "cache_write": null,
@@ -71,16 +81,6 @@
       "recent": false
     },
     {
-      "name": "glm-4.7-flashx",
-      "input": {
-        "cache_write": null,
-        "cached": 0.01,
-        "normal": 0.07
-      },
-      "output": 0.4,
-      "recent": false
-    },
-    {
       "name": "glm-4.6",
       "input": {
         "cache_write": null,
@@ -88,76 +88,6 @@
         "normal": 0.6
       },
       "output": 2.2,
-      "recent": false
-    },
-    {
-      "name": "glm-4.5",
-      "input": {
-        "cache_write": null,
-        "cached": 0.11,
-        "normal": 0.6
-      },
-      "output": 2.2,
-      "recent": false
-    },
-    {
-      "name": "glm-4.5-x",
-      "input": {
-        "cache_write": null,
-        "cached": 0.45,
-        "normal": 2.2
-      },
-      "output": 8.9,
-      "recent": false
-    },
-    {
-      "name": "glm-4.5-air",
-      "input": {
-        "cache_write": null,
-        "cached": 0.03,
-        "normal": 0.2
-      },
-      "output": 1.1,
-      "recent": false
-    },
-    {
-      "name": "glm-4.5-airx",
-      "input": {
-        "cache_write": null,
-        "cached": 0.22,
-        "normal": 1.1
-      },
-      "output": 4.5,
-      "recent": false
-    },
-    {
-      "name": "glm-4-32b-0414-128k",
-      "input": {
-        "cache_write": null,
-        "cached": null,
-        "normal": 0.1
-      },
-      "output": 0.1,
-      "recent": false
-    },
-    {
-      "name": "glm-4.7-flash",
-      "input": {
-        "cache_write": null,
-        "cached": 0,
-        "normal": 0
-      },
-      "output": 0,
-      "recent": false
-    },
-    {
-      "name": "glm-4.5-flash",
-      "input": {
-        "cache_write": null,
-        "cached": 0,
-        "normal": 0
-      },
-      "output": 0,
       "recent": false
     }
   ]

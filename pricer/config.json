@@ -2,7 +2,7 @@
   "providers": [
     {
       "name": "anthropic",
-      "do_json": true,
+      "do_json": false,
       "url": ""
     },
     {
@@ -22,7 +22,7 @@
     },
     {
       "name": "zai",
-      "do_json": false,
+      "do_json": true,
       "url": ""
     },
     {

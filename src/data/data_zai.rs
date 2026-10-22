@@ -29,6 +29,28 @@ const ZAI_MODELS: &[ModelPricing] = &[
 		tiers: &[],
 	},
 	ModelPricing {
+		name: "glm-5.3-flashx",
+		prices: TokenPrices {
+			input_normal: 0.37,
+			input_cached: Some(0.075),
+			input_cache_write: None,
+			output_normal: 1.25,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
+	ModelPricing {
+		name: "glm-5.3-flashx-legal",
+		prices: TokenPrices {
+			input_normal: 0.37,
+			input_cached: Some(0.075),
+			input_cache_write: None,
+			output_normal: 1.25,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
+	ModelPricing {
 		name: "glm-5.2",
 		prices: TokenPrices {
 			input_normal: 1.4,
