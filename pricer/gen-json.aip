@@ -24,7 +24,7 @@ local base_dir = p_utils.base_dir
 -- GROQ      - https://console.groq.com/docs/models 
 --           - pricing: https://groq.com/pricing/
 -- FIREWORKS - Login with filter https://app.fireworks.ai/models?filter=LLM&serverless=true, 
---             Static https://fireworks.ai/pricing#serverless-pricing
+--             Static https://docs.fireworks.ai/serverless/pricing
 -- TOGETHER  - login models price: https://api.together.ai/models
 --             names In the browser window: console.log($$('td[id]').map(td => td.id).join('\n'));
 -- ZAI       - https://docs.z.ai/guides/overview/pricing (take the md)
