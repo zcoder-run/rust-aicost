@@ -7,6 +7,28 @@ pub const KIMI: ProviderPricing = ProviderPricing {
 
 const KIMI_MODELS: &[ModelPricing] = &[
 	ModelPricing {
+		name: "kimi-k3.1-pro",
+		prices: TokenPrices {
+			input_normal: 2.0,
+			input_cached: Some(0.2),
+			input_cache_write: None,
+			output_normal: 10.0,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
+	ModelPricing {
+		name: "kimi-k3.1-pro-highspeed",
+		prices: TokenPrices {
+			input_normal: 4.0,
+			input_cached: Some(0.2),
+			input_cache_write: None,
+			output_normal: 20.0,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
+	ModelPricing {
 		name: "kimi-k3",
 		prices: TokenPrices {
 			input_normal: 3.0,

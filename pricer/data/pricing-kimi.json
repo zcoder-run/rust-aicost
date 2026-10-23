@@ -1,6 +1,26 @@
 {
   "models": [
     {
+      "name": "kimi-k3.1-pro",
+      "input": {
+        "cache_write": null,
+        "cached": 0.2,
+        "normal": 2
+      },
+      "output": 10,
+      "recent": true
+    },
+    {
+      "name": "kimi-k3.1-pro-highspeed",
+      "input": {
+        "cache_write": null,
+        "cached": 0.2,
+        "normal": 4
+      },
+      "output": 20,
+      "recent": true
+    },
+    {
       "name": "kimi-k3",
       "input": {
         "cache_write": null,
@@ -8,7 +28,7 @@
         "normal": 3
       },
       "output": 15,
-      "recent": true
+      "recent": false
     },
     {
       "name": "kimi-k2.7-code",
@@ -18,7 +38,7 @@
         "normal": 0.95
       },
       "output": 4,
-      "recent": true
+      "recent": false
     },
     {
       "name": "kimi-k2.7-code-highspeed",
@@ -28,7 +48,7 @@
         "normal": 1.9
       },
       "output": 8,
-      "recent": true
+      "recent": false
     },
     {
       "name": "kimi-k2.6",
