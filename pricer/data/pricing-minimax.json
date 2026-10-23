@@ -1,6 +1,16 @@
 {
   "models": [
     {
+      "name": "MiniMax-M3.1-Flash",
+      "input": {
+        "cache_write": null,
+        "cached": 0.015,
+        "normal": 0.15
+      },
+      "output": 0.6,
+      "recent": true
+    },
+    {
       "name": "MiniMax-M3",
       "input": {
         "cache_write": null,
@@ -8,26 +18,17 @@
         "normal": 0.3
       },
       "output": 1.2,
-      "recent": true
-    },
-    {
-      "name": "MiniMax-M2.7",
-      "input": {
-        "cache_write": 0.375,
-        "cached": 0.06,
-        "normal": 0.3
-      },
-      "output": 1.2,
-      "recent": false
-    },
-    {
-      "name": "MiniMax-M2.7-highspeed",
-      "input": {
-        "cache_write": 0.375,
-        "cached": 0.06,
-        "normal": 0.6
-      },
-      "output": 2.4,
+      "tiers": [
+        {
+          "above_prompt_tokens": 512000,
+          "input": {
+            "cache_write": null,
+            "cached": 0.12,
+            "normal": 0.6
+          },
+          "output": 2.4
+        }
+      ],
       "recent": false
     }
   ]

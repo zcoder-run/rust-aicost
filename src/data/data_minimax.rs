@@ -1,4 +1,4 @@
-use crate::{ModelPricing, ProviderPricing, TokenPrices};
+use crate::{ModelPricing, PricingTier, ProviderPricing, TokenPrices};
 
 pub const MINIMAX: ProviderPricing = ProviderPricing {
 	name: "minimax",
@@ -6,6 +6,17 @@ pub const MINIMAX: ProviderPricing = ProviderPricing {
 };
 
 const MINIMAX_MODELS: &[ModelPricing] = &[
+	ModelPricing {
+		name: "MiniMax-M3.1-Flash",
+		prices: TokenPrices {
+			input_normal: 0.15,
+			input_cached: Some(0.015),
+			input_cache_write: None,
+			output_normal: 0.6,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
 	ModelPricing {
 		name: "MiniMax-M3",
 		prices: TokenPrices {
@@ -15,7 +26,18 @@ const MINIMAX_MODELS: &[ModelPricing] = &[
 			output_normal: 1.2,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[
+			PricingTier {
+				above_prompt_tokens: 512_000,
+				prices: TokenPrices {
+					input_normal: 0.6,
+					input_cached: Some(0.12),
+					input_cache_write: None,
+					output_normal: 2.4,
+					output_reasoning: None,
+				},
+			},
+		],
 	},
 	ModelPricing {
 		name: "MiniMax-M2.7",
