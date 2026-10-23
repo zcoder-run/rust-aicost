@@ -94,7 +94,7 @@ pub struct ProviderPricing {
 - **Matching**: Models are matched using longest prefix matching against the provider's model list.
 - **Caching**: 
     - `input_cache_read` uses `usage.prompt_tokens_details.cached_tokens` (priced at `input_cached`, falling back to `input_normal` when absent).
-    - `input_cache_write` uses `usage.prompt_tokens_details.cache_creation_tokens` (priced at `input_cache_write`, falling back to 1.25x `input_normal` when absent).
+    - `input_cache_write` uses `usage.prompt_tokens_details.cache_creation_tokens` (priced at `input_cache_write`, falling back to `input_normal` when absent).
 - **Reasoning**: `output_reasoning` uses `usage.completion_tokens_details.reasoning_tokens` (priced at `output_reasoning`, falling back to `output_normal` when absent).
 - **Tiers**: the tier basis is `usage.prompt_tokens`. A tier applies when the prompt tokens are strictly greater than `above_prompt_tokens`. The whole request is billed at the selected tier. `AiCost.tier` is `Some(TierInfo)` with `tier_index` set to the applied tier's position in `tiers` when a tier was applied, and `None` for base prices.
 - **Token split**: `prompt_tokens` is the total prompt size. `input_normal` uses `prompt_tokens - cached_tokens - cache_creation_tokens`. Without `prompt_tokens_details`, all prompt tokens are normal. Missing usage counts default to `0`.

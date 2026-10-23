@@ -61,9 +61,8 @@ fn compute_with_pricing(model: &ModelPricing, usage: &Usage) -> AiCost {
 	// Extract prompt prices
 	let price_prompt_normal = prices.input_normal;
 	let price_prompt_cached = prices.input_cached.unwrap_or(price_prompt_normal);
-	// Note:  For now, for cache_creation_tokens assume * 1.25 for cache_creation_tokens (which is Anthropic rules, and this is only anthropic data)
-	// Note: The 1.25x is now only the fallback when the model has no explicit input_cache_write price.
-	let price_prompt_cache_creation = prices.input_cache_write.unwrap_or(1.25 * price_prompt_normal);
+	// Note: cache creation tokens fall back to the normal input price when no explicit input_cache_write price is set.
+	let price_prompt_cache_creation = prices.input_cache_write.unwrap_or(price_prompt_normal);
 
 	// -- Extract completion related tokens and pricing
 	let completion_tokens = usage.completion_tokens.unwrap_or(0) as f64;
@@ -247,10 +246,11 @@ mod tests {
 		let ai_cost = compute("openai", "gpt-4o-mini", &usage)?;
 
 		let gross_saving = 400.0 * (0.15 - 0.075) / 1_000_000.0;
-		let cache_creation = 200.0 * 0.15 * 1.25 / 1_000_000.0;
+		let cache_creation = 200.0 * 0.15 / 1_000_000.0;
 		let expected = ((gross_saving - cache_creation) * 1_000_000.0_f64).round() / 1_000_000.0;
 		assert!((ai_cost.input_cache_saving - expected).abs() < f64::EPSILON);
-		assert!(ai_cost.input_cache_saving < 0.0);
+		// Cache write falls back to input_normal, so the write cost cancels the read saving.
+		assert!(ai_cost.input_cache_saving == 0.0);
 
 		Ok(())
 	}
@@ -318,7 +318,7 @@ mod tests {
 		let ai_cost = compute_with_pricing(&FX_MODEL_NO_CACHE_WRITE, &usage);
 
 		// -- Check
-		assert!((ai_cost.input_cache_write - 0.00025).abs() < 1e-9);
+		assert!((ai_cost.input_cache_write - 0.0002).abs() < 1e-9);
 
 		Ok(())
 	}
