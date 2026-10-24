@@ -94,12 +94,12 @@ pub struct ProviderPricing {
 - **Matching**: Models are matched using longest prefix matching against the provider's model list.
 - **Caching**: 
     - `input_cache_read` uses `usage.prompt_tokens_details.cached_tokens` (priced at `input_cached`, falling back to `input_normal` when absent).
-    - `input_cache_write` uses `usage.prompt_tokens_details.cache_creation_tokens` (priced at `input_cache_write`, falling back to `input_normal` when absent).
+    - `input_cache_write` uses `usage.prompt_tokens_details.cache_creation_tokens` priced at `input_cache_write`. When `input_cache_write` is absent, those tokens are billed in `input_normal` at the `input_normal` price, and `input_cache_write` is `0` (no surcharge).
 - **Reasoning**: `output_reasoning` uses `usage.completion_tokens_details.reasoning_tokens` (priced at `output_reasoning`, falling back to `output_normal` when absent).
 - **Tiers**: the tier basis is `usage.prompt_tokens`. A tier applies when the prompt tokens are strictly greater than `above_prompt_tokens`. The whole request is billed at the selected tier. `AiCost.tier` is `Some(TierInfo)` with `tier_index` set to the applied tier's position in `tiers` when a tier was applied, and `None` for base prices.
-- **Token split**: `prompt_tokens` is the total prompt size. `input_normal` uses `prompt_tokens - cached_tokens - cache_creation_tokens`. Without `prompt_tokens_details`, all prompt tokens are normal. Missing usage counts default to `0`.
+- **Token split**: `prompt_tokens` is the total prompt size. `input_normal` uses `prompt_tokens - cached_tokens - cache_creation_tokens` when an `input_cache_write` price exists, and `prompt_tokens - cached_tokens` otherwise. Without `prompt_tokens_details`, all prompt tokens are normal. Missing usage counts default to `0`.
 - **Output split**: `output_normal` uses `completion_tokens - reasoning_tokens`.
-- **Cache saving**: `input_cache_saving` is `cached_tokens * (input_normal - cached price) / 1M`, minus the `input_cache_write` cost. It is `0` when there are no cache tokens, and it can be negative when cache writes outweigh read savings.
+- **Cache saving**: `input_cache_saving` is `cached_tokens * (input_normal - cached price) / 1M`, minus the cache write premium `cache_creation_tokens * (input_cache_write - input_normal) / 1M`. The premium is `0` when `input_cache_write` is absent. It is `0` when there are no cache tokens, and it can be negative when the cache write premium outweighs read savings.
 - **Rounding**: Each component (`input_normal`, `input_cache_read`, `input_cache_write`, `output_normal`, `output_reasoning`) is rounded to 6 decimal places. Subtotals and `total` are sums of the rounded components, also rounded to 6 decimal places.
 
 ## Supported Providers

@@ -62,7 +62,15 @@ fn compute_with_pricing(model: &ModelPricing, usage: &Usage) -> AiCost {
 	let price_prompt_normal = prices.input_normal;
 	let price_prompt_cached = prices.input_cached.unwrap_or(price_prompt_normal);
 	// Note: cache creation tokens fall back to the normal input price when no explicit input_cache_write price is set.
-	let price_prompt_cache_creation = prices.input_cache_write.unwrap_or(price_prompt_normal);
+	// Without an explicit cache write price, cache creation tokens are folded back into the normal input tokens (no surcharge).
+	let (prompt_tokens_normal, prompt_cache_creation_tokens, price_prompt_cache_creation) = match prices.input_cache_write {
+		Some(price) => (prompt_tokens_normal, prompt_cache_creation_tokens, price),
+		None => (
+			prompt_tokens_normal + prompt_cache_creation_tokens,
+			0.0,
+			price_prompt_normal,
+		),
+	};
 
 	// -- Extract completion related tokens and pricing
 	let completion_tokens = usage.completion_tokens.unwrap_or(0) as f64;
@@ -100,7 +108,10 @@ fn compute_with_pricing(model: &ModelPricing, usage: &Usage) -> AiCost {
 	// -- Compute cache saving
 	let input_cache_saving = if prompt_cached_tokens > 0.0 || prompt_cache_creation_tokens > 0.0 {
 		let gross_saving = prompt_cached_tokens * (price_prompt_normal - price_prompt_cached) / 1_000_000.0;
-		let saving = gross_saving - cost_prompt_cache_creation;
+		// Only the cache write premium over the normal input price reduces the saving.
+		let cache_write_premium =
+			prompt_cache_creation_tokens * (price_prompt_cache_creation - price_prompt_normal) / 1_000_000.0;
+		let saving = gross_saving - cache_write_premium;
 		(saving * 1_000_000.0).round() / 1_000_000.0
 	} else {
 		0.0
@@ -246,11 +257,11 @@ mod tests {
 		let ai_cost = compute("openai", "gpt-4o-mini", &usage)?;
 
 		let gross_saving = 400.0 * (0.15 - 0.075) / 1_000_000.0;
-		let cache_creation = 200.0 * 0.15 / 1_000_000.0;
-		let expected = ((gross_saving - cache_creation) * 1_000_000.0_f64).round() / 1_000_000.0;
+		let expected = (gross_saving * 1_000_000.0_f64).round() / 1_000_000.0;
 		assert!((ai_cost.input_cache_saving - expected).abs() < f64::EPSILON);
-		// Cache write falls back to input_normal, so the write cost cancels the read saving.
-		assert!(ai_cost.input_cache_saving == 0.0);
+		// No explicit cache write price, so cache creation tokens are billed as normal input (no surcharge).
+		assert!(ai_cost.input_cache_write == 0.0);
+		assert!((ai_cost.input_normal - 200.0 * 0.15 / 1_000_000.0).abs() < 1e-9);
 
 		Ok(())
 	}
@@ -298,6 +309,7 @@ mod tests {
 		// -- Check
 		assert!((ai_cost.input_cache_write - 0.0004).abs() < 1e-9);
 		assert!((ai_cost.input_normal - 0.0004).abs() < 1e-9);
+		assert!((ai_cost.input_cache_saving + 0.0002).abs() < 1e-9);
 
 		Ok(())
 	}
@@ -318,7 +330,9 @@ mod tests {
 		let ai_cost = compute_with_pricing(&FX_MODEL_NO_CACHE_WRITE, &usage);
 
 		// -- Check
-		assert!((ai_cost.input_cache_write - 0.0002).abs() < 1e-9);
+		assert!(ai_cost.input_cache_write == 0.0);
+		assert!((ai_cost.input_normal - 0.0006).abs() < 1e-9);
+		assert!(ai_cost.input_cache_saving == 0.0);
 
 		Ok(())
 	}
