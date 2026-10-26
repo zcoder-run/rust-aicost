@@ -17,6 +17,11 @@ doctest = false
 unsafe_code = "forbid"
 # unused = { level = "allow", priority = -1 } # For exploratory dev.
 
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
 [dependencies]
 # -- AI
 # for now use the genai::Usage exclusively
