@@ -1,7 +1,7 @@
 [package]
 name = "aicost"
-version = "0.3.3"
-# publish = false  # WIP, remove/common before release
+version = "0.3.4"
+publish = false  # WIP, remove/comment before release
 description = "Compute LLM usage costs based on the genai::Usage type."
 license = "MIT OR Apache-2.0"
 keywords = ["genai", "openai", "anthropic", "gemini", "utility"]
