@@ -11,7 +11,7 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 10.0,
 			input_cached: Some(1.0),
-			input_cache_write: None,
+			input_cache_write: Some(12.5),
 			output_normal: 50.0,
 			output_reasoning: None,
 		},
@@ -22,8 +22,19 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 2.0,
 			input_cached: Some(0.1),
-			input_cache_write: None,
+			input_cache_write: Some(2.5),
 			output_normal: 10.0,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
+	ModelPricing {
+		name: "gpt-6.1-terra",
+		prices: TokenPrices {
+			input_normal: 1.0,
+			input_cached: Some(0.05),
+			input_cache_write: Some(1.25),
+			output_normal: 5.0,
 			output_reasoning: None,
 		},
 		tiers: &[],
@@ -33,7 +44,7 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 2.0,
 			input_cached: Some(0.2),
-			input_cache_write: None,
+			input_cache_write: Some(2.5),
 			output_normal: 10.0,
 			output_reasoning: None,
 		},
@@ -44,7 +55,7 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 0.1,
 			input_cached: Some(0.01),
-			input_cache_write: None,
+			input_cache_write: Some(0.125),
 			output_normal: 0.5,
 			output_reasoning: None,
 		},
@@ -55,7 +66,7 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 4.0,
 			input_cached: Some(0.4),
-			input_cache_write: None,
+			input_cache_write: Some(5.0),
 			output_normal: 20.0,
 			output_reasoning: None,
 		},
@@ -66,7 +77,7 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 2.0,
 			input_cached: Some(0.2),
-			input_cache_write: None,
+			input_cache_write: Some(2.5),
 			output_normal: 12.0,
 			output_reasoning: None,
 		},
@@ -77,7 +88,7 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 		prices: TokenPrices {
 			input_normal: 0.2,
 			input_cached: Some(0.02),
-			input_cache_write: None,
+			input_cache_write: Some(0.25),
 			output_normal: 1.2,
 			output_reasoning: None,
 		},

@@ -21,6 +21,16 @@
       "recent": true
     },
     {
+      "name": "gpt-6.1-terra",
+      "input": {
+        "cache_write": 1.25,
+        "cached": 0.05,
+        "normal": 1
+      },
+      "output": 5,
+      "recent": true
+    },
+    {
       "name": "gpt-6-luna",
       "input": {
         "cache_write": 0.125,
