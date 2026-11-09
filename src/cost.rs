@@ -63,14 +63,15 @@ fn compute_with_pricing(model: &ModelPricing, usage: &Usage) -> AiCost {
 	let price_prompt_cached = prices.input_cached.unwrap_or(price_prompt_normal);
 	// Note: cache creation tokens fall back to the normal input price when no explicit input_cache_write price is set.
 	// Without an explicit cache write price, cache creation tokens are folded back into the normal input tokens (no surcharge).
-	let (prompt_tokens_normal, prompt_cache_creation_tokens, price_prompt_cache_creation) = match prices.input_cache_write {
-		Some(price) => (prompt_tokens_normal, prompt_cache_creation_tokens, price),
-		None => (
-			prompt_tokens_normal + prompt_cache_creation_tokens,
-			0.0,
-			price_prompt_normal,
-		),
-	};
+	let (prompt_tokens_normal, prompt_cache_creation_tokens, price_prompt_cache_creation) =
+		match prices.input_cache_write {
+			Some(price) => (prompt_tokens_normal, prompt_cache_creation_tokens, price),
+			None => (
+				prompt_tokens_normal + prompt_cache_creation_tokens,
+				0.0,
+				price_prompt_normal,
+			),
+		};
 
 	// -- Extract completion related tokens and pricing
 	let completion_tokens = usage.completion_tokens.unwrap_or(0) as f64;

@@ -26,18 +26,16 @@ const MINIMAX_MODELS: &[ModelPricing] = &[
 			output_normal: 1.2,
 			output_reasoning: None,
 		},
-		tiers: &[
-			PricingTier {
-				above_prompt_tokens: 512_000,
-				prices: TokenPrices {
-					input_normal: 0.6,
-					input_cached: Some(0.12),
-					input_cache_write: None,
-					output_normal: 2.4,
-					output_reasoning: None,
-				},
+		tiers: &[PricingTier {
+			above_prompt_tokens: 512_000,
+			prices: TokenPrices {
+				input_normal: 0.6,
+				input_cached: Some(0.12),
+				input_cache_write: None,
+				output_normal: 2.4,
+				output_reasoning: None,
 			},
-		],
+		}],
 	},
 	ModelPricing {
 		name: "MiniMax-M2.7",
