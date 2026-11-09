@@ -7,6 +7,28 @@ pub const ANTHROPIC: ProviderPricing = ProviderPricing {
 
 pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 	ModelPricing {
+		name: "claude-fable-5-2",
+		prices: TokenPrices {
+			input_normal: 8.0,
+			input_cached: Some(0.2),
+			input_cache_write: Some(10.0),
+			output_normal: 40.0,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
+	ModelPricing {
+		name: "claude-mythos-5-2",
+		prices: TokenPrices {
+			input_normal: 8.0,
+			input_cached: Some(0.2),
+			input_cache_write: Some(10.0),
+			output_normal: 40.0,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
+	ModelPricing {
 		name: "claude-fable-5-1",
 		prices: TokenPrices {
 			input_normal: 10.0,
@@ -120,7 +142,7 @@ pub const ANTHROPIC_MODELS: &[ModelPricing] = &[
 		name: "claude-sonnet-5-5",
 		prices: TokenPrices {
 			input_normal: 2.0,
-			input_cached: Some(0.2),
+			input_cached: Some(0.1),
 			input_cache_write: Some(2.5),
 			output_normal: 10.0,
 			output_reasoning: None,
