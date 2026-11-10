@@ -73,11 +73,10 @@ Create/update the json version of this model name/pricing.
 - For now, only the `deepseek-flash` is `recent: true`
 - The other models are legacy
 
-
 # gemini
 
 - Make sure all models are all lowercase
-- For argon, take the post december price. 
+- For models, take the prices after their discounted price. So, their permanent price. 
 - gemini-3.1-pro and below are now recent: false
 - If the page shows prices that depend on prompt length, for example "prompts <= 200k" and "> 200k", capture the lower range as the base prices and the higher range as a `tiers` entry, instead of a single price.
 - For gemini models,

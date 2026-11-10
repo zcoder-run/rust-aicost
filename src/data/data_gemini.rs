@@ -1,4 +1,4 @@
-use crate::{ModelPricing, ProviderPricing, TokenPrices};
+use crate::{ModelPricing, PricingTier, ProviderPricing, TokenPrices};
 
 pub const GEMINI: ProviderPricing = ProviderPricing {
 	name: "gemini",
@@ -6,6 +6,17 @@ pub const GEMINI: ProviderPricing = ProviderPricing {
 };
 
 const GEMINI_MODELS: &[ModelPricing] = &[
+	ModelPricing {
+		name: "gemini-4-carbon",
+		prices: TokenPrices {
+			input_normal: 4.0,
+			input_cached: Some(0.2),
+			input_cache_write: None,
+			output_normal: 20.0,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
 	ModelPricing {
 		name: "gemini-4-argon",
 		prices: TokenPrices {
@@ -20,10 +31,10 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 	ModelPricing {
 		name: "gemini-3.8-flash",
 		prices: TokenPrices {
-			input_normal: 0.75,
-			input_cached: Some(0.075),
+			input_normal: 1.5,
+			input_cached: Some(0.15),
 			input_cache_write: None,
-			output_normal: 3.75,
+			output_normal: 7.5,
 			output_reasoning: None,
 		},
 		tiers: &[],
@@ -31,10 +42,10 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 	ModelPricing {
 		name: "gemini-3.7-flash",
 		prices: TokenPrices {
-			input_normal: 0.75,
-			input_cached: Some(0.075),
+			input_normal: 1.5,
+			input_cached: Some(0.15),
 			input_cache_write: None,
-			output_normal: 3.75,
+			output_normal: 7.5,
 			output_reasoning: None,
 		},
 		tiers: &[],
@@ -42,10 +53,10 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 	ModelPricing {
 		name: "gemini-3.6-flash",
 		prices: TokenPrices {
-			input_normal: 0.75,
-			input_cached: Some(0.075),
+			input_normal: 1.5,
+			input_cached: Some(0.15),
 			input_cache_write: None,
-			output_normal: 3.75,
+			output_normal: 7.5,
 			output_reasoning: None,
 		},
 		tiers: &[],
@@ -81,7 +92,16 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 			output_normal: 12.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 200_000,
+			prices: TokenPrices {
+				input_normal: 4.0,
+				input_cached: Some(0.4),
+				input_cache_write: None,
+				output_normal: 18.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gemini-3.1-pro-customtools",
@@ -169,7 +189,16 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 			output_normal: 10.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 200_000,
+			prices: TokenPrices {
+				input_normal: 2.5,
+				input_cached: Some(0.25),
+				input_cache_write: None,
+				output_normal: 15.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gemini-2.5-flash",
@@ -257,7 +286,16 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 			output_normal: 12.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 200_000,
+			prices: TokenPrices {
+				input_normal: 4.0,
+				input_cached: Some(0.4),
+				input_cache_write: None,
+				output_normal: 18.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gemini-omni-flash",
@@ -323,7 +361,16 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 			output_normal: 10.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 200_000,
+			prices: TokenPrices {
+				input_normal: 2.5,
+				input_cached: None,
+				input_cache_write: None,
+				output_normal: 15.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gemma-3",
