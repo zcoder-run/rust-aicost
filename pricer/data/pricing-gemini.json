@@ -21,6 +21,16 @@
       "recent": true
     },
     {
+      "name": "gemini-4-hydrogen",
+      "input": {
+        "cache_write": null,
+        "cached": 0.075,
+        "normal": 1.5
+      },
+      "output": 7.5,
+      "recent": true
+    },
+    {
       "name": "gemini-3.8-flash",
       "input": {
         "cache_write": null,
@@ -28,7 +38,7 @@
         "normal": 1.5
       },
       "output": 7.5,
-      "recent": true
+      "recent": false
     },
     {
       "name": "gemini-3.7-flash",
@@ -68,7 +78,17 @@
         "normal": 0.3
       },
       "output": 2.5,
-      "recent": true
+      "recent": false
+    },
+    {
+      "name": "gemini-3.1-flash-lite",
+      "input": {
+        "cache_write": null,
+        "cached": 0.025,
+        "normal": 0.25
+      },
+      "output": 1.5,
+      "recent": false
     },
     {
       "name": "gemini-omni-flash",
@@ -116,16 +136,6 @@
       "input": {
         "cache_write": null,
         "cached": null,
-        "normal": 0.25
-      },
-      "output": 1.5,
-      "recent": false
-    },
-    {
-      "name": "gemini-3.1-flash-lite",
-      "input": {
-        "cache_write": null,
-        "cached": 0.025,
         "normal": 0.25
       },
       "output": 1.5,
@@ -203,27 +213,6 @@
       "recent": false
     },
     {
-      "name": "gemini-2.5-computer-use",
-      "input": {
-        "cache_write": null,
-        "cached": null,
-        "normal": 1.25
-      },
-      "output": 10,
-      "tiers": [
-        {
-          "above_prompt_tokens": 200000,
-          "input": {
-            "cache_write": null,
-            "cached": null,
-            "normal": 2.5
-          },
-          "output": 15
-        }
-      ],
-      "recent": false
-    },
-    {
       "name": "gemini-2.0-flash",
       "input": {
         "cache_write": null,
@@ -261,7 +250,7 @@
         "normal": 0.15
       },
       "output": 0,
-      "recent": true
+      "recent": false
     },
     {
       "name": "gemini-robotics-er-1.6",
@@ -271,6 +260,27 @@
         "normal": 1
       },
       "output": 5,
+      "recent": false
+    },
+    {
+      "name": "gemini-2.5-computer-use",
+      "input": {
+        "cache_write": null,
+        "cached": null,
+        "normal": 1.25
+      },
+      "output": 10,
+      "tiers": [
+        {
+          "above_prompt_tokens": 200000,
+          "input": {
+            "cache_write": null,
+            "cached": null,
+            "normal": 2.5
+          },
+          "output": 15
+        }
+      ],
       "recent": false
     },
     {

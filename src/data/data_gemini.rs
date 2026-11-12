@@ -29,6 +29,17 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 		tiers: &[],
 	},
 	ModelPricing {
+		name: "gemini-4-hydrogen",
+		prices: TokenPrices {
+			input_normal: 1.5,
+			input_cached: Some(0.075),
+			input_cache_write: None,
+			output_normal: 7.5,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
+	ModelPricing {
 		name: "gemini-3.8-flash",
 		prices: TokenPrices {
 			input_normal: 1.5,

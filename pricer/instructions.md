@@ -77,7 +77,7 @@ Create/update the json version of this model name/pricing.
 
 - Make sure all models are all lowercase
 - For models, take the prices after their discounted price. So, their permanent price. 
-- gemini-3.1-pro and below are now recent: false
+- all gemini-3  and below are now `recent: false` (nly gemini 4 are `recent: true`)
 - If the page shows prices that depend on prompt length, for example "prompts <= 200k" and "> 200k", capture the lower range as the base prices and the higher range as a `tiers` entry, instead of a single price.
 - For gemini models,
   - For gemini models there is no `caching write`, so cache value is for the `.cached` property.

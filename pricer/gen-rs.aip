@@ -1,6 +1,6 @@
 # Options
 ```toml
-model = "haiku"
+model = "dflash"
 ```
 
 # Before All
