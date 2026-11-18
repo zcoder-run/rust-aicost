@@ -1,4 +1,4 @@
-use crate::{ModelPricing, ProviderPricing, TokenPrices};
+use crate::{ModelPricing, PricingTier, ProviderPricing, TokenPrices};
 
 pub const OPENAI: ProviderPricing = ProviderPricing {
 	name: "openai",
@@ -15,7 +15,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 40.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 16.0,
+				input_cached: Some(0.8),
+				input_cache_write: Some(20.0),
+				output_normal: 60.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-6.2-sol",
@@ -26,7 +35,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 10.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 4.0,
+				input_cached: Some(0.2),
+				input_cache_write: Some(5.0),
+				output_normal: 15.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-6-astra",
@@ -37,7 +55,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 50.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 20.0,
+				input_cached: Some(2.0),
+				input_cache_write: Some(25.0),
+				output_normal: 75.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-6.1-sol",
@@ -48,7 +75,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 10.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 4.0,
+				input_cached: Some(0.2),
+				input_cache_write: Some(5.0),
+				output_normal: 15.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-6.1-terra",
@@ -59,7 +95,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 5.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 2.0,
+				input_cached: Some(0.1),
+				input_cache_write: Some(2.5),
+				output_normal: 7.5,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-6-sol",
@@ -70,7 +115,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 10.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 4.0,
+				input_cached: Some(0.4),
+				input_cache_write: Some(5.0),
+				output_normal: 15.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-6-luna",
@@ -81,7 +135,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 0.5,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 0.2,
+				input_cached: Some(0.02),
+				input_cache_write: Some(0.25),
+				output_normal: 0.75,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-5.6-sol",
@@ -92,7 +155,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 20.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 8.0,
+				input_cached: Some(0.8),
+				input_cache_write: Some(10.0),
+				output_normal: 30.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-5.6-terra",
@@ -103,7 +175,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 12.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 4.0,
+				input_cached: Some(0.4),
+				input_cache_write: Some(5.0),
+				output_normal: 18.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-5.6-luna",
@@ -114,7 +195,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 1.2,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 0.4,
+				input_cached: Some(0.04),
+				input_cache_write: Some(0.5),
+				output_normal: 1.8,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-5.5",
@@ -125,7 +215,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 30.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 10.0,
+				input_cached: Some(1.0),
+				input_cache_write: None,
+				output_normal: 45.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-5.5-pro",
@@ -136,7 +235,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 180.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 60.0,
+				input_cached: None,
+				input_cache_write: None,
+				output_normal: 270.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-5.4",
@@ -147,7 +255,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 15.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 5.0,
+				input_cached: Some(0.5),
+				input_cache_write: None,
+				output_normal: 22.5,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-5.4-mini",
@@ -180,7 +297,16 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 			output_normal: 180.0,
 			output_reasoning: None,
 		},
-		tiers: &[],
+		tiers: &[PricingTier {
+			above_prompt_tokens: 272_000,
+			prices: TokenPrices {
+				input_normal: 60.0,
+				input_cached: None,
+				input_cache_write: None,
+				output_normal: 270.0,
+				output_reasoning: None,
+			},
+		}],
 	},
 	ModelPricing {
 		name: "gpt-5.2",

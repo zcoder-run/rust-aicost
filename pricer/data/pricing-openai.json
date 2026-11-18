@@ -8,6 +8,17 @@
         "normal": 8
       },
       "output": 40,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 20,
+            "cached": 0.8,
+            "normal": 16
+          },
+          "output": 60
+        }
+      ],
       "recent": true
     },
     {
@@ -18,6 +29,17 @@
         "normal": 2
       },
       "output": 10,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 5,
+            "cached": 0.2,
+            "normal": 4
+          },
+          "output": 15
+        }
+      ],
       "recent": true
     },
     {
@@ -28,6 +50,17 @@
         "normal": 10
       },
       "output": 50,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 25,
+            "cached": 2,
+            "normal": 20
+          },
+          "output": 75
+        }
+      ],
       "recent": false
     },
     {
@@ -38,6 +71,17 @@
         "normal": 2
       },
       "output": 10,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 5,
+            "cached": 0.2,
+            "normal": 4
+          },
+          "output": 15
+        }
+      ],
       "recent": false
     },
     {
@@ -48,6 +92,17 @@
         "normal": 1
       },
       "output": 5,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 2.5,
+            "cached": 0.1,
+            "normal": 2
+          },
+          "output": 7.5
+        }
+      ],
       "recent": true
     },
     {
@@ -58,6 +113,17 @@
         "normal": 0.1
       },
       "output": 0.5,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 0.25,
+            "cached": 0.02,
+            "normal": 0.2
+          },
+          "output": 0.75
+        }
+      ],
       "recent": true
     },
     {
@@ -68,6 +134,17 @@
         "normal": 2
       },
       "output": 10,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 5,
+            "cached": 0.4,
+            "normal": 4
+          },
+          "output": 15
+        }
+      ],
       "recent": false
     },
     {
@@ -78,6 +155,17 @@
         "normal": 4
       },
       "output": 20,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 10,
+            "cached": 0.8,
+            "normal": 8
+          },
+          "output": 30
+        }
+      ],
       "recent": false
     },
     {
@@ -88,6 +176,17 @@
         "normal": 2
       },
       "output": 12,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 5,
+            "cached": 0.4,
+            "normal": 4
+          },
+          "output": 18
+        }
+      ],
       "recent": false
     },
     {
@@ -98,6 +197,17 @@
         "normal": 0.2
       },
       "output": 1.2,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": 0.5,
+            "cached": 0.04,
+            "normal": 0.4
+          },
+          "output": 1.8
+        }
+      ],
       "recent": false
     },
     {
@@ -108,6 +218,17 @@
         "normal": 5
       },
       "output": 30,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": null,
+            "cached": 1,
+            "normal": 10
+          },
+          "output": 45
+        }
+      ],
       "recent": false
     },
     {
@@ -118,6 +239,17 @@
         "normal": 30
       },
       "output": 180,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": null,
+            "cached": null,
+            "normal": 60
+          },
+          "output": 270
+        }
+      ],
       "recent": false
     },
     {
@@ -128,6 +260,17 @@
         "normal": 2.5
       },
       "output": 15,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": null,
+            "cached": 0.5,
+            "normal": 5
+          },
+          "output": 22.5
+        }
+      ],
       "recent": false
     },
     {
@@ -158,6 +301,17 @@
         "normal": 30
       },
       "output": 180,
+      "tiers": [
+        {
+          "above_prompt_tokens": 272000,
+          "input": {
+            "cache_write": null,
+            "cached": null,
+            "normal": 60
+          },
+          "output": 270
+        }
+      ],
       "recent": false
     }
   ]
