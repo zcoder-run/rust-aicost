@@ -11,7 +11,7 @@ pub fn compute(provider_type: &str, model_name: &str, usage: &Usage) -> Result<A
 	let provider_type = normalize_provider_type(provider_type);
 
 	// Find the model within the provider (longest start_with)
-	let model = find_model_entry(provider_type, model_name)
+	let model = resolve_model_entry(provider_type, model_name)
 		.ok_or_else(|| Error::ModelNotFound(provider_type.to_string(), model_name.to_string()))?;
 
 	Ok(compute_with_pricing(model, usage))
@@ -33,7 +33,7 @@ pub fn model_pricing(model_iden: &ModelIden) -> Option<ModelPricing> {
 
 	let provider_type = normalize_provider_type(provider_type);
 
-	find_model_entry(provider_type, model_name).copied()
+	resolve_model_entry(provider_type, model_name).copied()
 }
 
 // region:    --- Support
@@ -155,6 +155,14 @@ fn normalize_provider_type(provider_type: &str) -> &str {
 	}
 }
 
+fn resolve_model_entry(provider_type: &str, model_name: &str) -> Option<&'static ModelPricing> {
+	if is_bedrock(provider_type) {
+		find_bedrock_model_entry(model_name)
+	} else {
+		find_model_entry(provider_type, model_name)
+	}
+}
+
 fn find_model_entry(provider_type: &str, model_name: &str) -> Option<&'static ModelPricing> {
 	let provider = PROVIDERS.iter().find(|p| p.name == provider_type)?;
 
@@ -169,6 +177,29 @@ fn find_model_entry(provider_type: &str, model_name: &str) -> Option<&'static Mo
 	}
 
 	model
+}
+
+fn is_bedrock(provider_type: &str) -> bool {
+	matches!(provider_type, "bedrock_api" | "bedrock_sigv4")
+}
+
+fn find_bedrock_model_entry(model_name: &str) -> Option<&'static ModelPricing> {
+	let (provider, model_name) = bedrock_pricing_target(model_name)?;
+	find_model_entry(provider, model_name)
+}
+
+fn bedrock_pricing_target(model_name: &str) -> Option<(&str, &str)> {
+	let (prefix, suffix) = model_name.split_once('.')?;
+	let (provider, model_name) = match prefix {
+		"openai" | "anthropic" => (prefix, suffix),
+		"" => return None,
+		_ => suffix.split_once('.')?,
+	};
+
+	match provider {
+		"openai" | "anthropic" if !model_name.is_empty() => Some((provider, model_name)),
+		_ => None,
+	}
 }
 
 // endregion: --- Support
@@ -376,6 +407,108 @@ mod tests {
 		assert!((ai_cost.output_normal - 0.001).abs() < 1e-9);
 		assert!((ai_cost.total - 0.003002).abs() < 1e-9);
 		assert_eq!(ai_cost.tier, Some(TierInfo { tier_index: 0 }));
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_cost_bedrock_pricing_target_model_ids() -> TestResult {
+		// -- Setup & Fixtures
+		let cases = [
+			("global.openai.gpt-6-luna", Some(("openai", "gpt-6-luna"))),
+			("us.anthropic.claude-haiku-5-5", Some(("anthropic", "claude-haiku-5-5"))),
+			("openai.gpt-6-luna.v1", Some(("openai", "gpt-6-luna.v1"))),
+			("anthropic.claude-haiku-5-5", Some(("anthropic", "claude-haiku-5-5"))),
+			("us.meta.llama", None),
+			("us.global.openai.gpt-6-luna", None),
+			("openai.", None),
+		];
+
+		// -- Exec & Check
+		for (model_name, expected) in cases {
+			assert_eq!(bedrock_pricing_target(model_name), expected, "{model_name}");
+		}
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_cost_compute_bedrock_upstream_pricing() -> TestResult {
+		// -- Setup & Fixtures
+		let anthropic = PROVIDERS
+			.iter()
+			.find(|provider| provider.name == "anthropic")
+			.ok_or("Should have Anthropic pricing")?;
+		let anthropic_model = anthropic
+			.models
+			.iter()
+			.find(|model| !model.tiers.is_empty())
+			.or_else(|| anthropic.models.first())
+			.ok_or("Should have an Anthropic model")?;
+		let cases = [
+			("global", "openai", "gpt-4o-mini", 1_000, None),
+			(
+				"us",
+				"anthropic",
+				anthropic_model.name,
+				anthropic_model.tiers.first().map_or(1_000, |tier| tier.above_prompt_tokens + 1),
+				anthropic_model.tiers.first().map(|_| TierInfo { tier_index: 0 }),
+			),
+		];
+
+		// -- Exec & Check
+		for (profile, provider, model, prompt_tokens, expected_tier) in cases {
+			let usage = Usage {
+				prompt_tokens: Some(prompt_tokens.try_into()?),
+				completion_tokens: Some(500),
+				prompt_tokens_details: Some(PromptTokensDetails {
+					cached_tokens: Some(200),
+					cache_creation_tokens: Some(200),
+					..Default::default()
+				}),
+				..Default::default()
+			};
+			let direct_cost = compute(provider, model, &usage)?;
+			assert_eq!(direct_cost.tier, expected_tier);
+
+			for adapter in ["bedrock_api", "bedrock_sigv4"] {
+				let model_id = format!("{adapter}::{profile}.{provider}.{model}");
+				let bedrock_cost = compute(adapter, &model_id, &usage)?;
+
+				assert_eq!(bedrock_cost.total, direct_cost.total, "{model_id}");
+				assert_eq!(
+					bedrock_cost.input_cache_read, direct_cost.input_cache_read,
+					"{model_id}"
+				);
+				assert_eq!(
+					bedrock_cost.input_cache_write, direct_cost.input_cache_write,
+					"{model_id}"
+				);
+				assert_eq!(bedrock_cost.tier, direct_cost.tier, "{model_id}");
+			}
+		}
+
+		Ok(())
+	}
+
+	#[test]
+	fn test_cost_compute_bedrock_model_not_found() -> TestResult {
+		// -- Setup & Fixtures
+		let usage = Usage::default();
+		let cases = ["us.meta.llama", "global.openai.unknown-model", "gpt-4o-mini"];
+
+		// -- Exec & Check
+		for adapter in ["bedrock_api", "bedrock_sigv4"] {
+			for model_name in cases {
+				let model_id = format!("{adapter}::{model_name}");
+				let result = compute(adapter, &model_id, &usage);
+
+				assert!(matches!(
+					result,
+					Err(Error::ModelNotFound(provider, model)) if provider == adapter && model == model_name
+				));
+			}
+		}
 
 		Ok(())
 	}
