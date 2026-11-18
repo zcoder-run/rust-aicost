@@ -1,13 +1,12 @@
 [package]
 name = "aicost"
 version = "0.3.8"
-publish = false  # WIP, remove/comment before release
+# publish = false  # WIP, remove/comment before release
 description = "Compute LLM usage costs based on the genai::Usage type."
 license = "MIT OR Apache-2.0"
 keywords = ["genai", "openai", "anthropic", "gemini", "utility"]
 edition = "2024"
 rust-version = "1.95"
-homepage = "https://github.com/zcoder-run/rust-aicost"
 repository = "https://github.com/zcoder-run/rust-aicost"
 
 [lib]
