@@ -7,6 +7,17 @@ pub const GEMINI: ProviderPricing = ProviderPricing {
 
 const GEMINI_MODELS: &[ModelPricing] = &[
 	ModelPricing {
+		name: "gemini-4-neon",
+		prices: TokenPrices {
+			input_normal: 3.0,
+			input_cached: Some(0.15),
+			input_cache_write: None,
+			output_normal: 15.0,
+			output_reasoning: None,
+		},
+		tiers: &[],
+	},
+	ModelPricing {
 		name: "gemini-4-carbon",
 		prices: TokenPrices {
 			input_normal: 4.0,
@@ -292,21 +303,12 @@ const GEMINI_MODELS: &[ModelPricing] = &[
 		name: "gemini-pro-latest",
 		prices: TokenPrices {
 			input_normal: 2.0,
-			input_cached: Some(0.2),
+			input_cached: None,
 			input_cache_write: None,
 			output_normal: 12.0,
 			output_reasoning: None,
 		},
-		tiers: &[PricingTier {
-			above_prompt_tokens: 200_000,
-			prices: TokenPrices {
-				input_normal: 4.0,
-				input_cached: Some(0.4),
-				input_cache_write: None,
-				output_normal: 18.0,
-				output_reasoning: None,
-			},
-		}],
+		tiers: &[],
 	},
 	ModelPricing {
 		name: "gemini-omni-flash",
