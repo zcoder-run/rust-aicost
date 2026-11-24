@@ -151,10 +151,10 @@
       "name": "gpt-5.6-sol",
       "input": {
         "cache_write": 5,
-        "cached": 0.4,
-        "normal": 4
+        "cached": 0.5,
+        "normal": 5
       },
-      "output": 20,
+      "output": 30,
       "tiers": [
         {
           "above_prompt_tokens": 272000,

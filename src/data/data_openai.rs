@@ -149,10 +149,10 @@ const OPENAI_MODELS: &[ModelPricing] = &[
 	ModelPricing {
 		name: "gpt-5.6-sol",
 		prices: TokenPrices {
-			input_normal: 4.0,
-			input_cached: Some(0.4),
+			input_normal: 5.0,
+			input_cached: Some(0.5),
 			input_cache_write: Some(5.0),
-			output_normal: 20.0,
+			output_normal: 30.0,
 			output_reasoning: None,
 		},
 		tiers: &[PricingTier {
